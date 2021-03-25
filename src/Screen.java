@@ -16,7 +16,7 @@ public class Screen {
                         System.out.print("# ");
                     }
                     else {
-                        if (i%((CELLSPACING/2)+1)==0 && j%((CELLSPACING/2)+1)==0) { //Fix later
+                        if (i%((CELLSPACING/2)+1)==0 && j%((CELLSPACING/2)+1)==0) {
                             System.out.print(board[i/(CELLSPACING+1)][j/(CELLSPACING+1)]+" ");
                         }
                         else {
