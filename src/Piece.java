@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Piece {
     //Declare variables
     Boolean side = false; //False = enemy, True = Player
@@ -28,5 +29,11 @@ public class Piece {
     //This method kills a piece
     public void kill() {
         isAlive = true;
+    }
+
+    //Override toString method (for debugging)
+    @Override
+    public String toString() {
+        return "Side: "+side+"; Icon: "+icon+"; Pos:"+Arrays.toString(pos)+"; Color:"+color+" ";
     }
 }
