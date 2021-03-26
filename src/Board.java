@@ -6,7 +6,6 @@ public class Board {
 
     //Constructor
     public Board() {
-        /*
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -21,9 +20,11 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, PLAYERCOLOR);
             }
         }
-        */
+
+        /*
         board[3][2] = new Piece(false, "X", new int[]{3, 2}, COMPUTERCOLOR);
         board[4][3] = new Piece(true, "O", new int[]{4, 3}, PLAYERCOLOR);
+         */
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
