@@ -42,6 +42,23 @@ public class TitleScreen {
         //If the user enters 0, then go back to the main menu.
         if(code == 0) mainMenu();
         //Load the saved game...
+        load(code);
+    }
+    /*
+    10:21PM on March 25, 2021.
+    Fahad Mateen made the load function to read and get stuff from the file cause im a legend.
+    */
+    public static String load(int code) throws IOException {
+        String filePath = "saves/" +code+".txt";
+        BufferedReader file = new BufferedReader( new FileReader(filePath));
+        String data = file.readLine();
+        String line = file.readLine();
+        while (line != null) {
+            data = data + "\n" + line;
+            line = file.readLine();
+        }
+        System.out.println(data);
+        return data;
     }
     //About game.
     public static void about() {
