@@ -29,6 +29,4 @@ public class Piece {
     public void kill() {
         isAlive = true;
     }
-
-
 }
