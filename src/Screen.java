@@ -51,4 +51,13 @@ public class Screen {
             line = br.readLine();
         }
     }
+
+    //Shortcut print and println.
+    public static void print(String message) {
+        System.out.print(message);
+    }
+    public static void println(String message) {
+        System.out.println(message);
+    }
+
 }
