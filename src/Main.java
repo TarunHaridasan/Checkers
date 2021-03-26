@@ -1,14 +1,13 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         //Testing
-        int[] pos = {1, 2};
-        Piece piece = new Piece(true, "X", pos, "red");
-        int[] newPos = {1,1};
+        Board board = new Board();
 
-        //Using methods
-        System.out.println(piece.pos[1]);
-        piece.updatePos(newPos);
-        System.out.println(piece.pos[1]);
 
+        //Test move
+        boolean ans = board.isValidMove(new int[][] {{4,3}, {2,3}}, true);
+        System.out.println(ans);
     }
 }
