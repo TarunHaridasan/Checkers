@@ -38,6 +38,7 @@ public class TitleScreen {
             Thread.sleep(1000);
             //Going back to the main menu.
             loadOpt();
+            return;
         }
         //If the user enters 0, then go back to the main menu.
         if(code == 0) {
@@ -136,6 +137,7 @@ public class TitleScreen {
             Thread.sleep(1000);
             //Going back to the main menu.
             mainMenu();
+            return;
         }
         Screen.println("");
         //Subtracting 1 from the user's choice to convert it to an index value.
