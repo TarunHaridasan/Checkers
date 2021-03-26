@@ -10,6 +10,10 @@ import java.util.*;
 /*
     10:21PM on March 25, 2021.
     Jason Su finished up the template for the title screen with a placeholder for each required method.
+    3:35PM on March 26, 2021.
+    Jason Su finished the about method for the title screen and optimized the load game method.
+    3:50PM on March 26, 2021.
+    Jason Su finished the help method for the title screen.
 */
 public class TitleScreen {
     // Class variables.
@@ -83,12 +87,28 @@ public class TitleScreen {
         return data.toString();
     }
     //About game.
-    public static void about() {
-        Screen.print("About the game...");
+    public static void about() throws IOException, InterruptedException {
+        //Prints out the title of the game.
+        for(int i = 0; i < 2; i++) Screen.println("");
+        Screen.printFromFile("./ASCII/name.txt");
+        //Printing out the about menu.
+        Screen.printFromFile("./ASCII/about.txt");
+        //Waiting for user's input.
+        input.nextLine();
+        //Going back to the main menu.
+        mainMenu();
     }
     //Help menu.
-    public static void help() {
-        Screen.print("Needing help...");
+    public static void help() throws IOException, InterruptedException {
+        //Prints out the title of the game.
+        for(int i = 0; i < 2; i++) Screen.println("");
+        Screen.printFromFile("./ASCII/name.txt");
+        //Printing out the about menu.
+        Screen.printFromFile("./ASCII/help.txt");
+        //Waiting for user's input.
+        input.nextLine();
+        //Going back to the main menu.
+        mainMenu();
     }
     //Choices handler interface.
     public static interface Choices {
@@ -98,8 +118,8 @@ public class TitleScreen {
     public static Choices[] choices = new Choices[] {
         new Choices() {public void run() { play(); } },
         new Choices() {public void run() throws IOException, InterruptedException { loadOpt(); } },
-        new Choices() {public void run() { about(); } },
-        new Choices() {public void run() { help(); } },
+        new Choices() {public void run() throws IOException, InterruptedException { about(); } },
+        new Choices() {public void run() throws IOException, InterruptedException { help(); } },
     };
     //Initializing the title screen.
     public static void initialize() throws IOException, InterruptedException {
