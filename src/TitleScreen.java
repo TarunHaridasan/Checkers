@@ -40,25 +40,46 @@ public class TitleScreen {
             loadOpt();
         }
         //If the user enters 0, then go back to the main menu.
-        if(code == 0) mainMenu();
+        if(code == 0) {
+            mainMenu();
+            return;
+        }
         //Load the saved game...
-        load(code);
+        Screen.println(load(code));
     }
     /*
-    10:21PM on March 25, 2021.
-    Fahad Mateen made the load function to read and get stuff from the file cause im a legend.
+        10:21PM on March 25, 2021.
+        Fahad Mateen made the load function to read and get stuff from the file cause im a legend.
+        2:50PM on March 26, 2021.
+        Jason Su added comments and error handling to the code block below.
     */
-    public static String load(int code) throws IOException {
+    public static String load(int code) throws IOException, InterruptedException {
+        //Variables
         String filePath = "saves/" +code+".txt";
-        BufferedReader file = new BufferedReader( new FileReader(filePath));
-        String data = file.readLine();
+        BufferedReader file = null;
+        //Attempting to create buffered reader from provided file name.
+        try {
+            file = new BufferedReader(new FileReader(filePath));
+        }
+        catch(FileNotFoundException err) {
+            //If the code was not found.
+            Screen.println("");
+            Screen.println("That is an invalid code. Please try again.");
+            //Return to the main menu.
+            Thread.sleep(1000);
+            mainMenu();
+            return "";
+        }
+        //Creating a string builder for building the contents of the file.
+        StringBuilder data = new StringBuilder(file.readLine());
         String line = file.readLine();
+        //Looping through the entire file and concatenating a data string.
         while (line != null) {
-            data = data + "\n" + line;
+            data.append("\n").append(line);
             line = file.readLine();
         }
-        System.out.println(data);
-        return data;
+        //Returning the data object as a string.
+        return data.toString();
     }
     //About game.
     public static void about() {
