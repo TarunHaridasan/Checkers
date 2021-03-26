@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
   Jason Su, Tarun Haridasan, Fahad Mateen
   04/06/2021
@@ -121,3 +122,7 @@ public class TitleScreen {
     }
 }
 
+=======
+public class TitleScreen {
+}
+>>>>>>> 4278eaa5dbe1dac12157224cad9999029ccf9117
