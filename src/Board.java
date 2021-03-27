@@ -1,11 +1,28 @@
+import java.util.Set;
+
 public class Board {
-    //Declare variables
     Piece[][] board = new Piece[8][8];
-    final String COMPUTERCOLOR = "red";
-    final String PLAYERCOLOR = "yellow";
+
+    //Game Settings
+    String COMPUTERCOLOR = null;
+    String PLAYERCOLOR = null;
+    String BORDERCOLOR = null;
+    char BORDERCHAR = ' ';
+    String BORDERSTRING = null; //BorderChar + Color
+    int CELLSPACING = 0; //Must be an odd number or printing will be broken
+    int SIDELENGTH = 0;
 
     //Constructor
-    public Board() {
+    public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
+        //Get and store game settings from user
+        COMPUTERCOLOR = compCol;
+        PLAYERCOLOR = playerCol;
+        BORDERCOLOR = borderCol;
+        BORDERCHAR = borderChar;
+        BORDERSTRING = Screen.COLORCODES.get(BORDERCOLOR)+BORDERCHAR+Screen.COLORCODES.get("RESET");
+        CELLSPACING = cellSpacing;
+        SIDELENGTH = (cellSpacing*8)+9;
+
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -20,11 +37,6 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, PLAYERCOLOR);
             }
         }
-
-        /*
-        board[3][2] = new Piece(false, "X", new int[]{3, 2}, COMPUTERCOLOR);
-        board[4][3] = new Piece(true, "O", new int[]{4, 3}, PLAYERCOLOR);
-         */
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)

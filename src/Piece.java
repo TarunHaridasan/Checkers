@@ -33,6 +33,6 @@ public class Piece {
 
     @Override
     public String toString() {
-        return Arrays.toString(pos);
+        return icon;
     }
 }
