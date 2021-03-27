@@ -89,4 +89,19 @@ public class Board {
         //All checks passed means it is a valid move
         return true;
     }
+
+    //This method relocates a piece on the board
+    public void move(Piece piece, int[] end) {
+        int[] start = piece.pos;
+        piece.pos = end;
+        board[end[0]][end[1]] = piece;
+        board[start[0]][start[1]] = null;
+    }
+
+    //This method checks if coordinates are within boundaries
+    public static boolean isBoundary (int[] coords) {
+         if (coords[0]>=0 && coords[0]<8 && coords[1]>=0 && coords[1]<8)
+             return true;
+        return false;
+    }
 }
