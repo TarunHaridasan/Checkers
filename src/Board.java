@@ -61,6 +61,12 @@ public class Board {
 
     //This method checks all the conditions to verify if a move about to be made is valid
     public Boolean isValidMove(int[][] path, boolean turn) {
+        //Check if both start and end locations are within boundary
+        for (int i=0; i<path.length; i++) {
+            if (path[i][0]<0 && path[i][0]>7 && path[i][1]<0 && path[i][1]>7)
+                return false;
+        }
+
         //Check if piece even exists at the start locations
         int[] start = path[0];
         if (board[start[0]][start[1]]==null) return false;
@@ -96,12 +102,5 @@ public class Board {
         piece.pos = end;
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
-    }
-
-    //This method checks if coordinates are within boundaries
-    public static boolean isBoundary (int[] coords) {
-         if (coords[0]>=0 && coords[0]<8 && coords[1]>=0 && coords[1]<8)
-             return true;
-        return false;
     }
 }
