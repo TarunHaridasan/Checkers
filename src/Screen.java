@@ -17,27 +17,50 @@ public class Screen {
 
     //This method prints the checker board onto the console window with the right formatting
     public static void printBoard(Board board) {
-        for(int i=0; i<board.SIDELENGTH; i++) {
-            for (int j=0; j<board.SIDELENGTH; j++) {
-                if (i%(board.CELLSPACING+1)==0) //Print a horizontal line all the way
-                    System.out.print(board.BORDERSTRING+" ");
-                else {
-                    if (j%(board.CELLSPACING+1)==0)
-                        System.out.print(board.BORDERSTRING+" ");  //Print the border to the cell
-                    else { //Print the icon text in the middle of the cell
-                        if (i%((board.CELLSPACING/2)+1)==0 && j%((board.CELLSPACING/2)+1)==0) {
-                            Piece piece = board.board[i/(board.CELLSPACING+1)][j/(board.CELLSPACING+1)];
-                            if (piece!=null) { //Print the piece if is in this cell with color specified
-                                System.out.print(COLORCODES.get(piece.color)+piece+COLORCODES.get("RESET")+" "); //piece will auto return icon
-                            }
-
+        //Print the horizontal ruler
+        for(int i=0; i<8; i++) {
+            for (int j=0; j< board.cellSpacing+1; j++)
+                System.out.print(" ");
+            System.out.print(Character.toString(97+i));
+            for (int j=0; j<board.cellSpacing; j++)
+                System.out.print(" ");
+        }
+        System.out.println();
+        //Print the board
+        for (int i=0; i< board.sideLength; i++) {
+            //Print a horizontal line every cellspacing+1
+            if (i%(board.cellSpacing+1)==0) {
+                for (int j=0; j< board.sideLength; j++) {
+                    System.out.print(board.borderString);
+                }
+            }
+            //Do not print a horizontal line
+            else {
+                for (int j=0; j<board.sideLength; j++) {
+                    //Print vertical ruler at the beginning of each row, in the middle of each cell
+                    if (j==0 && (board.cellSpacing-1==0 || i%(board.cellSpacing-1)==0))
+                        System.out.print(Character.toString(49+ i/(board.cellSpacing+1))+" ");
+                    //Print part of the vertical line every cellspacing+1
+                    else if (j%(board.cellSpacing+1)==0)
+                        System.out.print(board.borderString);
+                    //Do not print vertical border here
+                    else {
+                        //Print a checker piece right in the middle of the cell
+                        if (j%((board.cellSpacing/2)+1)==0 && i%((board.cellSpacing/2)+1)==0) {
+                            //If a checker piece exists in this coordinates, print it
+                            Piece piece = board.getPiece(new int[] {i/(board.cellSpacing+1), j/(board.cellSpacing+1)});
+                            if (piece!=null)
+                                System.out.print(COLORCODES.get(piece.color)+piece+COLORCODES.get("RESET")+" ");
+                            //No checker piece at this location, so print empty space
                             else
-                                System.out.print("  "); //Print empty space if no piece in this cell
+                                System.out.print("  ");
                         }
+                        //Just print empty space
                         else
                             System.out.print("  ");
                     }
                 }
+
             }
             System.out.println();
         }

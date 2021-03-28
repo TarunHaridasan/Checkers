@@ -4,29 +4,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         //Make board
-        Board board = new Board("WHITE", "YELLOW", "PURPLE", '.', 3);
+        Board board = new Board("WHITE", "YELLOW", "PURPLE", '.', 1);
+        Scanner scan = new Scanner(System.in);
 
         //Print board onto screen
         Screen.printBoard(board);
 
-
-
         /*
-        //Boundary testing
-        System.out.println(Board.isBoundary(new int[] {-1, 8}));
-        System.out.println(Board.isBoundary(new int[] {0, 8}));
-        System.out.println(Board.isBoundary(new int[] {-1, 7}));
-        System.out.println(Board.isBoundary(new int[] {0, 7}));
-        System.out.println(Board.isBoundary(new int[] {2, 7}));
+        //Testing
+        int xi = 5;
+        int yi = 7;
+        int xf = 4;
+        int yf = 6;
+        Piece piece = board.getPiece(new int[] {xi, yi});
 
-        //Move testing
-        Piece piece = board.getPiece(new int[] {7,7});
-        board.move(piece, new int[] {3,7});
-        piece = board.getPiece(new int[] {0,0});
-        board.move(piece, new int[] {7,7});
-        Screen.refresh(board, 20);
-
-
+        //Check move
+        if (board.isValidMove(new int[][] {{xi,yi},{xf, yf}}, true))
+            board.move(piece, new int[] {xf, yf});
          */
     }
 }
