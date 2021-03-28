@@ -63,7 +63,7 @@ public class Board {
     public Boolean isValidMove(int[][] path, boolean turn) {
         //Check if both start and end locations are within boundary
         for (int i=0; i<path.length; i++) {
-            if (path[i][0]<0 && path[i][0]>7 && path[i][1]<0 && path[i][1]>7)
+            if (path[i][0]<0 || path[i][0]>7 || path[i][1]<0 || path[i][1]>7)
                 return false;
         }
 
@@ -71,7 +71,7 @@ public class Board {
         int[] start = path[0];
         if (board[start[0]][start[1]]==null) return false;
 
-        //Check if piece is owned by the player who is making the turn (True = player and False = Computer)
+        //Check if piece is owned by the player who is making the turn (True = player, and False = Computer)
         if (board[start[0]][start[1]].side!=turn) return false;
 
         //Check if the place to move to is empty
@@ -81,15 +81,16 @@ public class Board {
         //Non-attack (1 diagonal space moved) and Attack moves (2 diagonal space moved)
         int horizontalDistance =  end[1]-start[1];
         int verticalDistance = end[0]-start[0];
+        //Regular 1-diagonal space move
         if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1) {
-            if (Math.abs(horizontalDistance)!=1) return false;
-            else if ((verticalDistance!=-1 && turn==true) || verticalDistance!=1 && turn==false) return false;
+            if ((verticalDistance==1 && turn==true) || verticalDistance==-1 && turn==false) return false;
         }
-        else {
-            if (Math.abs(horizontalDistance)!=2) return false;
-            else if ((verticalDistance!=-2 && turn==true) || verticalDistance!=2 && turn==false) return false;
+        //Attack 2-diagonal space move
+        else if (Math.abs(horizontalDistance)==2 && Math.abs(verticalDistance)==2){
+            if ((verticalDistance==2 && turn==true) || verticalDistance==-2 && turn==false) return false;
             Piece attackPiece = board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)];
             if (attackPiece==null) return false;
+            if (attackPiece.side==turn) return false;
         }
 
         //All checks passed means it is a valid move
@@ -102,5 +103,20 @@ public class Board {
         piece.pos = end;
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
+    }
+
+    //This method checks if the game is over by examining if all of one side's pieces are dead.
+    public Boolean isGameOver() {
+        boolean isFoundX = false;
+        boolean isFoundO = false;
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; i++) {
+                if (board[i][j]==null) continue;
+                else if (isFoundX && isFoundO) return false;
+                else if (board[i][j].side==true) isFoundO=true;
+                else isFoundX=true;
+            }
+        }
+        return true;
     }
 }
