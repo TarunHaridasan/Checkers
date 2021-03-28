@@ -124,20 +124,20 @@ public class TitleScreen {
         Screen.printFromFile("./ASCII/settings.txt");
         //Asking for input
         Screen.print("Input:");
-        int setting = Integer.parseInt(input.nextLine());
+        int setting = input.nextInt();
         //Choosing input
         if (setting == 1 || setting == 2){
             //Changing Colour
             Screen.print("Enter Colour:");
             String colour = input.nextLine();
-            //Checking to see if colour is vaild
-            if (colour == "black" || colour == "RED" || colour == "GREEN" || colour == "YELLOW" ||
-                    colour == "BLUE" || colour == "PURPLE" || colour == "CYAN" || colour == "WHITE") {
+            Screen.println(colour);
+            //Checking to see if colour is valid
+            if (colour.equals("BLACK") || colour.equals("RED") || colour.equals("GREEN") || colour.equals("YELLOW") || colour.equals("BLUE") || colour.equals("PURPLE") || colour.equals("CYAN") || colour.equals("WHITE")) {
                 Screen.println("Colour Changed.");
             }
             else {
                 Screen.println("Please Choose a Valid Colour: Black, Red, Green, Yellow, Blue, Purple, Cyan, White, or Reset");
-                colour = input.nextLine();
+                colour = input.nextLine(); //******************NEEDS TO KEEP LOOPING UNTIL CORRECT COLOR IS ENTERED***************************//
             }
         }
         if (setting == 3){
@@ -150,11 +150,11 @@ public class TitleScreen {
             Screen.print("Padding Has Been Changed To: "+padding);
         }
         if (setting == 4){
-            Screen.print("Enter a Border Charactar:");
+            Screen.print("Enter a Border Character:");
             String border = input.next();
             while (border.length() > 1){
                 Screen.println("Border is too long.");
-                Screen.println("Enter a Border Charactar:");
+                Screen.println("Enter a Border Character:");
                 border = input.next();
             }
             Screen.print("Border Has Been Changed To: " + "'"+ border + "'");
