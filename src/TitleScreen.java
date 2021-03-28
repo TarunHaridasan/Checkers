@@ -19,6 +19,8 @@ public class TitleScreen {
     // Class variables.
     public static String username = "";
     private final static Scanner input = new Scanner(System.in);
+    public static String compColour = "WHITE", playerColour = "YELLOW", borderColour = "PURPLE", borderChar = ".";
+    public static int cellSpacing = 1;
     //Choice functions.
     //Play game.
     public static void play() {
@@ -53,10 +55,13 @@ public class TitleScreen {
         Screen.println(load(code));
     }
     /*
+        <->OVERALL EDIT HISTORY<->
         10:21PM on March 25, 2021.
         Fahad Mateen made the load function to read and get stuff from the file cause im a legend.
         2:50PM on March 26, 2021.
         Jason Su added comments and error handling to the code block below.
+        3:31PM on March 28, 2021.
+        Jason Su added compatibility for a settings page and added the empty boiler functions for Fahad.
     */
     public static String load(int code) throws IOException, InterruptedException {
         //Variables
@@ -110,6 +115,14 @@ public class TitleScreen {
         //Going back to the main menu.
         mainMenu();
     }
+    //Settings menu.
+    public static void settings() throws IOException, InterruptedException {
+        //Prints out the title of the game.
+        for(int i = 0; i < 2; i++) Screen.println("");
+        Screen.printFromFile("./ASCII/name.txt");
+        //Printing out the settings menu.
+
+    }
     //Choices handler interface.
     public static interface Choices {
         void run() throws IOException, InterruptedException;
@@ -120,6 +133,7 @@ public class TitleScreen {
         new Choices() {public void run() throws IOException, InterruptedException { loadOpt(); } },
         new Choices() {public void run() throws IOException, InterruptedException { about(); } },
         new Choices() {public void run() throws IOException, InterruptedException { help(); } },
+            new Choices() {public void run() throws IOException, InterruptedException { settings(); } }
     };
     //Initializing the title screen.
     public static void initialize() throws IOException, InterruptedException {
