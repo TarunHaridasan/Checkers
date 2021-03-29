@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,11 +11,18 @@ public class Main {
 
         //Testing
         Screen.printBoard(board);
-        Piece piece = board.getPiece(new int[] {3,3});
-        Integer[][] moves = piece.visualize(board);
-        for (int i=0;i<moves.length; i++) {
-            System.out.println(Arrays.toString(moves[i]));
+        HashMap<String, Integer[][]> moves = ai.visualize(board, true);
+
+        //Print out
+        for (String key : moves.keySet()) {
+            System.out.print(key+": ");
+            Integer[][] value = moves.get(key);
+            for (int i=0; i<value.length; i++) {
+                System.out.print(Arrays.toString(value[i])+" ");
+            }
+            System.out.println();
         }
+        //System.out.println(moves);
 
     }
 }

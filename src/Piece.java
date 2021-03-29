@@ -9,6 +9,7 @@ public class Piece {
     int[] pos = new int[2];
     Boolean isKing = false;
     Boolean isAlive = true;
+    String id = null;
 
     //Constructor
     public Piece(Boolean side, String icon, int[] pos, String color) {
@@ -16,6 +17,7 @@ public class Piece {
         this.icon = icon;
         this.pos = pos;
         this.color = color;
+        this.id = pos[0]+""+pos[1];
     }
 
     //This method is used to promote the piece to a king

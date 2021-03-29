@@ -23,7 +23,7 @@ public class Board {
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
 
-        /*
+
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -38,10 +38,9 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, playerColor);
             }
         }
-               */
 
-        board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
-        board[4][4] = new Piece(true, "O", new int[]{4, 4}, playerColor);
+        //board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
+        //board[4][4] = new Piece(true, "O", new int[]{4, 4}, playerColor);
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
