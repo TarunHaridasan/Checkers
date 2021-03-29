@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.*;
+
 public class Screen {
     //Declare properties
     final static int CELLSPACING = 3; //Must be an odd number or printing will be broken
@@ -60,4 +62,19 @@ public class Screen {
         System.out.println(message);
     }
 
+    /*
+        2:53PM on March 29, 2021.
+        Jason Su added a shortcut method in order to quickly get user input.
+    */
+    //Shortcut prompt method.
+    public static String prompt(String message) {
+        //Variables and scanner
+        String input = "";
+        Scanner scan = new Scanner(System.in);
+        //Printing the message and asking for user response.
+        Screen.print(message);
+        input = scan.nextLine();
+        //Returning the user's response as a string.
+        return input;
+    }
 }
