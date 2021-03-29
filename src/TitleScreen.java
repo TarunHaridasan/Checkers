@@ -33,9 +33,8 @@ public class TitleScreen {
         Screen.printFromFile("./ASCII/name.txt");
         int code = 0;
         //Asking the user for a special code given to them when they saved their game.
-        Screen.print("Enter your code (0 to go back): ");
         try {
-            code = Integer.parseInt(input.nextLine());
+            code = Integer.parseInt(Screen.prompt("Enter your code (0 to go back): "));
         }
         catch(NumberFormatException err) {
             //If the user enters something that cannot be parsed into an integer.
@@ -178,8 +177,7 @@ public class TitleScreen {
         for(int i = 0; i < 2; i++) Screen.println("");
         Screen.printFromFile("./ASCII/name.txt");
         //Getting username.
-        Screen.print("Enter your name: ");
-        username = input.nextLine();
+        username = Screen.prompt("Enter your name: ");
         //Calling the main menu method.
         mainMenu();
     }
@@ -197,9 +195,8 @@ public class TitleScreen {
         int userInput = 0;
         //Asking for user input.
         Screen.println("");
-        Screen.print("Input: ");
         try {
-            userInput = Integer.parseInt(input.nextLine());
+            userInput = Integer.parseInt(Screen.prompt("Input: "));
         }
         catch(NumberFormatException err) {
             //If the user enters something that cannot be parsed into an integer.
