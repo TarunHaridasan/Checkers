@@ -19,12 +19,13 @@ public class TitleScreen {
     // Class variables.
     public static String username = "";
     private final static Scanner input = new Scanner(System.in);
-    public static String compColour = "WHITE", playerColour = "YELLOW", borderColour = "PURPLE", borderChar = ".";
+    public static String compColour = "WHITE", playerColour = "YELLOW", borderColour = "PURPLE";
+    public static char borderChar = '.';
     public static int cellSpacing = 1;
     //Choice functions.
     //Play game.
     public static void play() {
-        Screen.print("Playing the game...");
+        Screen.println("Playing the game...");
     }
     //Loading game.
     public static void loadOpt() throws IOException, InterruptedException {

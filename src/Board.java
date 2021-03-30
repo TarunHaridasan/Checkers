@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Board {
@@ -11,6 +13,7 @@ public class Board {
     String borderString = null; //BorderChar + Color
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
+    public static String firstChars = "abcedef", secondChars = "12345678";
 
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
@@ -40,7 +43,7 @@ public class Board {
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
-    public static int[] toCoors(String input) {
+    public int[] toCoords(String input) {
         char letter = input.charAt(0);
         letter = Character.toLowerCase(letter);
         char num = input.charAt(1);
