@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Board {
@@ -12,6 +13,7 @@ public class Board {
     String borderString = null; //BorderChar + Color
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
+    public static String firstChars = "abcedefgh", secondChars = "12345678";
 
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
@@ -26,6 +28,7 @@ public class Board {
 
         /*
         //Generate the computer pieces (top of the board)
+        /*
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 == 0) //Alternate the placement
@@ -34,8 +37,9 @@ public class Board {
         }
         */
 
-
         board[4][4] = new Piece(false, "X", new int[]{4, 4}, computerColor);
+        board[2][2] = new Piece(false, "X", new int[]{2, 2}, computerColor);
+
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -49,7 +53,7 @@ public class Board {
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
-    public static int[] toCoors(String input) {
+    public int[] toCoords(String input) {
         char letter = input.charAt(0);
         letter = Character.toLowerCase(letter);
         char num = input.charAt(1);
@@ -60,14 +64,13 @@ public class Board {
         letterInt-=97; //Adjust the value so that it becomes zero indexed.
         num-=49;
 
-        return new int[]{letterInt, num};
+        return new int[]{num, letterInt};
     }
 
     //This method gets a piece from a coordinate
     public Piece getPiece(int[] coords) {
         return board[coords[0]][coords[1]];
     }
-
     //This method checks all the conditions to verify if a move about to be made is valid
     public Boolean isValidMove(int[][] path, boolean turn) {
         //Check if both start and end locations are within boundary

@@ -88,4 +88,28 @@ public class Screen {
             line = br.readLine();
         }
     }
+
+    //Shortcut print and println.
+    public static void print(String message) {
+        System.out.print(message);
+    }
+    public static void println(String message) {
+        System.out.println(message);
+    }
+
+    /*
+        2:53PM on March 29, 2021.
+        Jason Su added a shortcut method in order to quickly get user input.
+    */
+    //Shortcut prompt method.
+    public static String prompt(String message) {
+        //Variables and scanner
+        String input = "";
+        Scanner scan = new Scanner(System.in);
+        //Printing the message and asking for user response.
+        Screen.print(message);
+        input = scan.nextLine();
+        //Returning the user's response as a string.
+        return input;
+    }
 }

@@ -1,0 +1,13 @@
+                           ┌─────────────────────────────┐
+                           │                             │
+                           │    Welcome to Checkers!     │
+                           │                             │
+                           │   This game was made by:    │
+                           │  Jason Su, Tarun Haridasan  │
+                           │        & Fahad Mateen       │
+                           │                             │
+                           │   Please enjoy this game!   │
+                           │ Submitted for ICS4U Console │
+                           │           project.          │
+                           └─────────────────────────────┘
+                              Press enter to go back...

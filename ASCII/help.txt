@@ -1,0 +1,36 @@
+  ┌───────────────────────────────────────────────────────────────────────────────┐
+  │                                                                               │
+  │    Welcome to console Checkers! This game is very simple to play.             │
+  │                                                                               │
+  │  When you choose play, you will have the option to choose the difficulty      │
+  │                                                                               │
+  │   of the AI that is playing against you. Be careful what you choose for...    │
+  │                                                                               │
+  │    Once you begin the game, the console will print out a chess board. In      │
+  │                                                                               │
+  │     order to make moves, you input your desired moves into the console        │
+  │                                                                               │
+  │      input line. The columns on the board are labelled with letters,          │
+  │                                                                               │
+  │       and the rows are labelled with numbers. This is the format for          │
+  │                                                                               │
+  │     inputting your moves: (coords of starting piece) (coords of move(s)).     │
+  │                                                                               │
+  │           Example: b4 e5 -> Move the piece on b4 to the e5 square!            │
+  │                                                                               │
+  │      Of course, if you are in a position to chain moves, go for it! The       │
+  │                                                                               │
+  │       game will not allow you to make any moves that are illegal, so do       │
+  │                                                                               │
+  │      not worry.                                                               │
+  │                                                                               │
+  │      Example: b4 e5 e7 d3 -> (If your moves are all legal, this will work!)   │
+  │                                                                               │
+  │                                                                               │
+  │           Remember, don't bite off more than you can chew, and...             │
+  │                                                                               │
+  │                                                                               │
+  │                              HAVE FUN!                                        │
+  │                                                                               │
+  └───────────────────────────────────────────────────────────────────────────────┘
+                            Press enter to go back...
