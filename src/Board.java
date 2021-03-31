@@ -13,7 +13,7 @@ public class Board {
     String borderString = null; //BorderChar + Color
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
-    public static String firstChars = "abcedef", secondChars = "12345678";
+    public static String firstChars = "abcedefgh", secondChars = "12345678";
 
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
@@ -27,12 +27,15 @@ public class Board {
         sideLength = (cellSpacing*8)+9;
 
         //Generate the computer pieces (top of the board)
+        /*
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 == 0) //Alternate the placement
                     board[i][j] = new Piece(false, "X", new int[]{i, j}, computerColor);
             }
         }
+        */
+        board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -54,14 +57,17 @@ public class Board {
         letterInt-=97; //Adjust the value so that it becomes zero indexed.
         num-=49;
 
-        return new int[]{letterInt, num};
+        return new int[]{num, letterInt};
     }
 
     //This method gets a piece from a coordinate
     public Piece getPiece(int[] coords) {
         return board[coords[0]][coords[1]];
     }
-
+    //This better method gets a piece from a coordinate
+    public Piece getBetterPiece(int y, int x) {
+        return board[y][x];
+    }
     //This method checks all the conditions to verify if a move about to be made is valid
     public Boolean isValidMove(int[][] path, boolean turn) {
         //Check if both start and end locations are within boundary
