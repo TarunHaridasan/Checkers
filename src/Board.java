@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Set;
 
 public class Board {
@@ -23,7 +24,7 @@ public class Board {
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
 
-
+        /*
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -31,6 +32,10 @@ public class Board {
                     board[i][j] = new Piece(false, "X", new int[]{i, j}, computerColor);
             }
         }
+        */
+
+
+        board[4][4] = new Piece(false, "X", new int[]{4, 4}, computerColor);
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -85,9 +90,11 @@ public class Board {
         //Non-attack (1 diagonal space moved) and Attack moves (2 diagonal space moved)
         int horizontalDistance =  end[1]-start[1];
         int verticalDistance = end[0]-start[0];
+
         //Regular 1-diagonal space move
         if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1) {
             if ((verticalDistance==1 && turn==true) || verticalDistance==-1 && turn==false) return false;
+            return true;
         }
         //Attack 2-diagonal space move
         else if (Math.abs(horizontalDistance)==2 && Math.abs(verticalDistance)==2){
@@ -95,15 +102,22 @@ public class Board {
             Piece attackPiece = board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)];
             if (attackPiece==null) return false;
             if (attackPiece.side==turn) return false;
+            return true;
         }
 
-        //All checks passed means it is a valid move
-        return true;
+        //Anything other than 1 or 2 diagonal moves
+        return false;
     }
 
     //This method relocates a piece on the board
     public void move(Piece piece, int[] end) {
         int[] start = piece.pos;
+        int verticalDistance = end[0]-start[0];
+        int horizontalDistance = end[1] - start[1];
+        //If its an attack move, remove the piece to be attacked from array
+        if (Math.abs(verticalDistance)==2 && Math.abs(horizontalDistance)==2) {
+            board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)] = null;
+        }
         piece.pos = end;
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
