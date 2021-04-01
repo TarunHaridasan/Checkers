@@ -38,8 +38,8 @@ public class Board {
         }
         */
 
-        board[4][4] = new Piece(false, "X", new int[]{4, 4}, computerColor);
-        board[2][4] = new Piece(false, "X", new int[]{2, 4}, computerColor);
+        board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
+        board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
 
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
@@ -94,15 +94,15 @@ public class Board {
         //Non-attack (1 diagonal space moved) and Attack moves (2 diagonal space moved)
         int horizontalDistance =  end[1]-start[1];
         int verticalDistance = end[0]-start[0];
-
+        boolean isKing = getPiece(path[0]).isKing;
         //Regular 1-diagonal space move
         if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1 && mustKill==false) {
-            if ((verticalDistance==1 && turn==true) || verticalDistance==-1 && turn==false) return false;
+            if ((verticalDistance==1 && turn==true && !isKing) || verticalDistance==-1 && turn==false && !isKing) return false;
             return true;
         }
         //Attack 2-diagonal space move
         else if (Math.abs(horizontalDistance)==2 && Math.abs(verticalDistance)==2){
-            if ((verticalDistance==2 && turn==true) || verticalDistance==-2 && turn==false) return false;
+            if ((verticalDistance==2 && turn==true && !isKing) || verticalDistance==-2 && turn==false && !isKing) return false;
             Piece attackPiece = board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)];
             if (attackPiece==null) return false;
             if (attackPiece.side==turn) return false;
@@ -125,6 +125,10 @@ public class Board {
         piece.pos = end;
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
+        //Check if the piece should be promoted to king
+        if (piece.side && piece.pos[0]==0 || !piece.side && piece.pos[0]==7) {
+            piece.promote();
+        }
     }
 
     //This method checks if the game is over by examining if all of one side's pieces are dead.

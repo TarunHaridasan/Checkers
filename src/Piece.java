@@ -23,6 +23,8 @@ public class Piece {
     //This method is used to promote the piece to a king
     public void promote() {
         isKing = true;
+        if (side) icon = "@"; //O king
+        else icon = "!"; //X king
     }
 
     //This method changes the position of the piece
@@ -42,7 +44,7 @@ public class Piece {
         int directionMultiplier = 1;
         if (side) directionMultiplier = -1;
 
-        //Try regular piece, regular move
+        //Try regular piece, regular move (INTEGRATE FOR KING)
         int x = pos[0] + directionMultiplier;
         for (int i=-1; i<=1; i+=2) {
             int y = pos[1] + i;
