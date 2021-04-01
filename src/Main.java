@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, IOException {
         //Initializing the title screen.
-        //TitleScreen.initialize();
+        TitleScreen.initialize();
         /*
             2:28PM on March 30, 2021.
             Jason Su wrote the baseline loop code and input for user.
@@ -28,7 +28,7 @@ public class Main {
                     String[] inputArr = input.split(" ");
 
                     //Check if user input is valid
-                    if (!board.isInputValid(inputArr)) continue;
+                    if (!Board.isInputValid(inputArr)) continue;
 
                     //Convert the input to array indices
                     int[][] coordinateArr = new int[inputArr.length][2];

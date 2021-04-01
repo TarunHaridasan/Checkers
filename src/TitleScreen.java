@@ -119,44 +119,147 @@ public class TitleScreen {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
         Screen.printFromFile("./ASCII/name.txt");
-        //Printing out the settings menu.
-        Screen.printFromFile("./ASCII/settings.txt");
+        //Printing out the settings page.
+        Screen.println("==============================================");
+        Screen.println("1. Computer Colour: " + TitleScreen.compColour);
+        Screen.println("");
+        Screen.println("2. Player Colour: " + TitleScreen.playerColour);
+        Screen.println("");
+        Screen.println("3. Border Colour: " + TitleScreen.borderColour);
+        Screen.println("");
+        Screen.println("4. Cell Padding: " + TitleScreen.cellSpacing);
+        Screen.println("");
+        Screen.println("5. Border Character: '" + TitleScreen.borderChar + "'");
+        Screen.println("");
+        Screen.println("Enter 0 to go back.");
+        Screen.println("==============================================");
+        Screen.println("");
         //Asking for input
-        Screen.print("Input:");
-        int setting = input.nextInt();
-        //Choosing input
-        if (setting == 1 || setting == 2){
+        int setting = 0;
+        //Getting the user's input.
+        try {
+            setting = Integer.parseInt(Screen.prompt("Input: "));
+        } catch(NumberFormatException err) {
+            //If the input cannot be converted into an integer, go back to the settings page.
+            Screen.println("That is an invalid option... Please try again!");
+            Screen.println("");
+            Thread.sleep(1000);
+            settings();
+            return;
+        }
+        //Checking if the number is within the range.
+        if(setting == 0) {
+            //If the input cannot be converted into an integer, go back to the settings page.
+            Screen.println("Returning to the main menu...");
+            Screen.println("");
+            Thread.sleep(1000);
+            mainMenu();
+            return;
+        }
+        else if(setting < 1 || setting > 5) {
+            //If the input is out of range, go back to the settings page.
+            Screen.println("That is an invalid option... Please try again!");
+            Screen.println("");
+            Thread.sleep(1000);
+            settings();
+            return;
+        }
+        //Processing input
+        if (setting == 1 || setting == 2 || setting == 3) {
+            //Variables
+            String[] colours = {"BLACK", "RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "CYAN", "WHITE"};
             //Changing Colour
-            Screen.print("Enter Colour:");
-            String colour = input.nextLine();
-            Screen.println(colour);
-            //Checking to see if colour is valid
-            if (colour.equals("BLACK") || colour.equals("RED") || colour.equals("GREEN") || colour.equals("YELLOW") || colour.equals("BLUE") || colour.equals("PURPLE") || colour.equals("CYAN") || colour.equals("WHITE")) {
-                Screen.println("Colour Changed.");
+            Screen.printFromFile("./ASCII/colours.txt");
+            //Asking for input
+            int colourChoice = 0;
+            //Getting the user's input.
+            try {
+                colourChoice = Integer.parseInt(Screen.prompt("Input: "));
+            } catch(NumberFormatException err) {
+                //If the input cannot be converted into an integer, go back to the settings page.
+                Screen.println("That is an invalid option... Please try again!");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
             }
-            else {
-                Screen.println("Please Choose a Valid Colour: Black, Red, Green, Yellow, Blue, Purple, Cyan, White, or Reset");
-                colour = input.nextLine(); //******************NEEDS TO KEEP LOOPING UNTIL CORRECT COLOR IS ENTERED***************************//
+            //If the input is 0, go back to settings page.
+            if(colourChoice == 0) {
+                //If the input is 0, go back to settings page.
+                Screen.println("Returning to settings...");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
             }
+            //Checking if the number is within the range.
+            if(colourChoice < 1 || colourChoice > 8) {
+                //If the input is out of range, go back to the settings page.
+                Screen.println("That is an invalid option... Please try again!");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
+            }
+            //Settings the proper variables to the proper values.
+            if(setting == 1) TitleScreen.compColour = colours[colourChoice-1];
+            else if(setting == 2) TitleScreen.playerColour = colours[colourChoice-1];
+            else TitleScreen.borderColour = colours[colourChoice-1];
+            //Returning to the settings page.
+            settings();
         }
-        if (setting == 3){
-            Screen.print("Enter a New Padding:");
-            int padding = input.nextInt();
-            while (padding % 2 == 0){
-                Screen.print("Enter a New Padding It Must Be An Odd Number:");
-                padding = input.nextInt();
+        else if (setting == 4){
+            //Temporary variable for padding.
+            int padding = 0;
+            //Getting the user's input.
+            Screen.printFromFile("./ASCII/padding.txt");
+            try {
+                padding = Integer.parseInt(Screen.prompt("Input: "));
+            } catch(NumberFormatException err) {
+                //If the input cannot be converted into an integer, go back to the settings page.
+                Screen.println("That is an invalid option... Please try again!");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
             }
-            Screen.print("Padding Has Been Changed To: "+padding);
+            //If the input is 0, go back to settings page.
+            if(padding == 0) {
+                //If the input is 0, go back to settings page.
+                Screen.println("Returning to settings...");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
+            }
+            //If the number is out of the range.
+            if(padding < 1 || padding > 9) {
+                //If the input is out of the range, go back to the settings page.
+                Screen.println("That is an invalid option... Please try again!");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
+            }
+            //If the number is even.
+            if(padding % 2 == 0) {
+                //If the input is out of the range, go back to the settings page.
+                Screen.println("That is an invalid option... Input MUST be an odd number. Please try again!");
+                Screen.println("");
+                Thread.sleep(1000);
+                settings();
+                return;
+            }
+            TitleScreen.cellSpacing = padding;
+            settings();
         }
-        if (setting == 4){
-            Screen.print("Enter a Border Character:");
-            String border = input.next();
-            while (border.length() > 1){
-                Screen.println("Border is too long.");
-                Screen.println("Enter a Border Character:");
-                border = input.next();
-            }
-            Screen.print("Border Has Been Changed To: " + "'"+ border + "'");
+        else {
+            //Printing a message.
+            Screen.printFromFile("./ASCII/border.txt");
+            //Asking for input and assigning the border character value.
+            TitleScreen.borderChar = Screen.prompt("Input: ").charAt(0);
+            //Going back to the settings screen.
+            settings();
         }
     }
     //Choices handler interface.
@@ -204,6 +307,7 @@ public class TitleScreen {
             Screen.println("There was an unknown error... Please try again!");
             Thread.sleep(1000);
             //Going back to the main menu.
+            Thread.sleep(1000);
             mainMenu();
             return;
         }
@@ -215,6 +319,7 @@ public class TitleScreen {
             Screen.println("Invalid option! Try again.");
             Thread.sleep(1000);
             //Going back to the main menu.
+            Thread.sleep(1000);
             mainMenu();
         }
     }
