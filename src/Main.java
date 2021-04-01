@@ -1,8 +1,10 @@
 import com.rits.cloning.Cloner;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         //Initializing the title screen.
         TitleScreen.initialize();
         /*
