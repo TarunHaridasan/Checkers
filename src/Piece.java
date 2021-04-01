@@ -46,7 +46,7 @@ public class Piece {
         int x = pos[0] + directionMultiplier;
         for (int i=-1; i<=1; i+=2) {
             int y = pos[1] + i;
-            if (board.isValidMove(new int[][] {pos, {x, y}}, side))
+            if (board.isValidMove(new int[][] {pos, {x, y}}, side, false))
                 moves.add(new Integer[] {x, y});
         }
 
@@ -54,7 +54,7 @@ public class Piece {
         x = pos[0] + (directionMultiplier*2);
         for (int i=-2; i<=2; i+=4) {
             int y = pos[1]+i;
-            if (board.isValidMove(new int[][] {pos, {x,y}}, side))
+            if (board.isValidMove(new int[][] {pos, {x,y}}, side, false))
                 moves.add(new Integer[] {x,y});
         }
 
