@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.io.*;
 
 public class Board {
     Piece[][] board = new Piece[8][8];
@@ -38,7 +39,7 @@ public class Board {
         */
 
         board[4][4] = new Piece(false, "X", new int[]{4, 4}, computerColor);
-        board[2][2] = new Piece(false, "X", new int[]{2, 2}, computerColor);
+        board[2][4] = new Piece(false, "X", new int[]{2, 4}, computerColor);
 
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
@@ -72,7 +73,7 @@ public class Board {
         return board[coords[0]][coords[1]];
     }
     //This method checks all the conditions to verify if a move about to be made is valid
-    public Boolean isValidMove(int[][] path, boolean turn) {
+    public Boolean isValidMove(int[][] path, boolean turn, boolean mustKill) {
         //Check if both start and end locations are within boundary
         for (int i=0; i<path.length; i++) {
             if (path[i][0]<0 || path[i][0]>7 || path[i][1]<0 || path[i][1]>7)
@@ -95,7 +96,7 @@ public class Board {
         int verticalDistance = end[0]-start[0];
 
         //Regular 1-diagonal space move
-        if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1) {
+        if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1 && mustKill==false) {
             if ((verticalDistance==1 && turn==true) || verticalDistance==-1 && turn==false) return false;
             return true;
         }
@@ -131,7 +132,7 @@ public class Board {
         boolean isFoundX = false;
         boolean isFoundO = false;
         for (int i=0; i<8; i++) {
-            for (int j=0; j<8; i++) {
+            for (int j=0; j<8; j++) {
                 if (board[i][j]==null) continue;
                 else if (isFoundX && isFoundO) return false;
                 else if (board[i][j].side==true) isFoundO=true;
@@ -140,4 +141,32 @@ public class Board {
         }
         return true;
     }
+
+    //This method checks if the input coordinates the user enters is valid and in the correct format
+    public static Boolean isInputValid(String[] input) {
+        //Check if the user only entered 1 value
+        if (input.length<=1) {
+            Screen.println("You must enter more than just one set of coordinates! You may wish to re-read the help page.");
+            return false;
+        }
+
+        //Check the formatting of each coordinate in array
+        for (String current : input) {
+            //Check the length of each string
+            if (current.length()!=2) {
+                Screen.println("Invalid coordinates! Each pair must consist of 2 characters. ");
+                return false;
+            }
+            //Check if the first character is a letter and the second is a number
+            if(!(Board.firstChars.contains(Character.toString(current.charAt((0))))) || !(Board.secondChars.contains(Character.toString(current.charAt((1)))))) {
+                Screen.println("Invalid coordinates! The first character must be a character between a and h, and the second character must be a number from 1 to 8");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //This method is used to deep clone objects for visualization, so that changes are not made to the original board
+
 }

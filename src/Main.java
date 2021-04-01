@@ -1,8 +1,6 @@
+import com.rits.cloning.Cloner;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, IOException {
@@ -14,105 +12,70 @@ public class Main {
         */
         //Starting the board.
         Board board = new Board(TitleScreen.compColour, TitleScreen.playerColour, TitleScreen.borderColour, TitleScreen.borderChar, TitleScreen.cellSpacing);
+        Screen.printBoard(board);
+
         //Main game loop.
-        //Temporary turn controlling variables.
-        boolean player = true, gameOver = false;
+        boolean player = true;
         while(true) {
-            //Printing the board every turn.
-            Screen.printBoard(board);
             //Player turn.
             if(player) {
-                //Placeholder variables.
-                boolean valid = true;
-                String input = "";
-                String[] inputArray = null;
                 int[][] coords = null;
+
                 //Looping until the player's input is valid.
+                boolean valid = false;
                 do {
-                    //Resetting the valid variable to true.
-                    valid = true;
-                    //Temporary character placeholder.
-                    char temp = ' ';
-                    //Asking the user for input.
-                    input = Screen.prompt("Input: ");
-                    inputArray = input.split(" ");
-                    //Checking for a valid input.
-                    for(String current : inputArray) {
-                        //Checking if the user only entered one value.
-                        //Screen.println("1. " + current);
-                        if(inputArray.length < 2) {
-                            //If so... then this set of inputs is invalid.
-                            valid = false;
-                            Screen.println("You must enter more than just one set of coordinates! You may wish to re-read the help page.");
-                            Screen.println("");
-                            break;
+                    String input = Screen.prompt("Input: ");
+                    String[] inputArr = input.split(" ");
+
+                    //Check if user input is valid
+                    if (!board.isInputValid(inputArr)) continue;
+
+                    //Convert the input to array indices
+                    int[][] coordinateArr = new int[inputArr.length][2];
+                    for (int i=0; i< inputArr.length; i++) coordinateArr[i] = board.toCoords(inputArr[i]);
+
+                    //Deep clone the original array in case one of the move in the chain is valid
+                    Cloner cloner = new Cloner();
+                    Piece[][] originalBoard = cloner.deepClone(board.board);
+
+                    //Check if the move (or moves if chained) are valid
+                    boolean mustKill = false;
+                    if (coordinateArr.length>2) mustKill = true; //If chaining moves, all moves must be ones to kill the enemey piece
+                    for (int i=0; i< coordinateArr.length-1; i++) {
+                        int[][] path = Arrays.copyOfRange(coordinateArr, i, i+2);
+                        Screen.println(Arrays.toString(path[0])+""+Arrays.toString(path[1]));
+                        if (board.isValidMove(path, true, mustKill)){
+                            Screen.println("VALID");
+                            board.move(board.getPiece(path[0]), path[1]);
+                            valid = true;
                         }
-                        /*
-                            Checking if the first character of each input is a letter...
-                            and if the second character of each input is a number within the range.
-                        */
-                        if(!(Board.firstChars.contains(Character.toString(current.charAt((0))))) || !(Board.secondChars.contains(Character.toString(current.charAt((1)))))) {
-                            //If not... then this set of inputs is invalid.
-                            valid = false;
-                            Screen.println("That input set is invalid... Please try again!4");
-                            Screen.println("");
-                            break;
-                        }
-                    }
-                    if(!valid) continue;
-                    //Creating a 2d array for the set of coordinates that the piece will move.
-                    coords = new int[inputArray.length][2];
-                    for (int i = 0; i < inputArray.length; i++) {
-                        String current = inputArray[i];
-                        //Filling up the array with coordinates using a helper method from the Board class.
-                        int[] temporary = board.toCoords(current);
-                        coords[i] = temporary;
-                        //System.out.println(Arrays.toString(coords[0])+" "+Arrays.toString(coords[1]));
-                    }
-                    //Checking the move set to see if it is valid.
-                    //Checking to see if there is a piece on the first coordinate.
-                    if(board.getPiece(new int[] {coords[0][0], coords[0][1]}) == null) {
-                        valid = false;
-                        Screen.println("That input set is invalid... Please try again!");
-                        Screen.println("");
-                        continue;
-                    }
-                    //Temporary variable to store original position of the piece in case the chain is invalid.
-                    int[] original = coords[0];
-                    for(int i = 0; i < coords.length-1; i++) {
-                        //Temporary variable to store two coords at a time.
-                        int[][] tempCoords = new int[2][2];
-                        tempCoords[0] = coords[i];
-                        tempCoords[1] = coords[i+1];
-                        //Checking if one set of moves is valid.
-                        String message = "";
-                        message += tempCoords[0][1]+" "+tempCoords[0][0];
-                        Screen.println(message);
-                        if(board.isValidMove(tempCoords, true))
-                            board.move(board.getPiece(new int[] {tempCoords[0][0], tempCoords[0][1]}), tempCoords[1]);
                         else {
-                            //If the move is invalid, move it back to the original spot.
-                            board.move(board.getPiece(new int[] {tempCoords[0][0], tempCoords[0][1]}), original);
-                            //Afterwards, ask user for another input.
+                            Screen.println("INVALID");
                             valid = false;
-                            Screen.println("That input set is invalid... Please try again!5");
-                            Screen.println("");
+                            board.board = originalBoard;
                             break;
                         }
                     }
-                    if(valid) break;
-                } while(true);
+
+                    //If valid == true, then we don't need to ask the user for input again
+                    if (valid) break;
+                } while(!valid);
+
                 //Switching the turn variable.
                 player = false;
             }
             //AI turn.
             else {
-                Screen.println("");
                 Screen.println("Computer does its turn...");
-                Screen.println("");
                 player = true;
             }
-            if(gameOver) break;
+
+            //Refreshing the board after every turn.
+            Screen.refresh(board, 10);
+
+            //Check if game over
+            if(board.isGameOver()) break;
         }
+        Screen.println("Game Over!");
     }
 }
