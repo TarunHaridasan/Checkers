@@ -19,7 +19,7 @@ public class TitleScreen {
     // Class variables.
     public static String username = "";
     private final static Scanner input = new Scanner(System.in);
-    public static String compColour = "WHITE", playerColour = "YELLOW", borderColour = "PURPLE";
+    public static String compColour = "BLUE", playerColour = "RED", borderColour = "GREEN";
     public static char borderChar = '.';
     public static int cellSpacing = 1;
     //Choice functions.

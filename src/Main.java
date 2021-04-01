@@ -1,9 +1,8 @@
 import com.rits.cloning.Cloner;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException, IOException {
+    public static void main(String[] args) {
         //Initializing the title screen.
         //TitleScreen.initialize();
         /*
@@ -19,8 +18,6 @@ public class Main {
         while(true) {
             //Player turn.
             if(player) {
-                int[][] coords = null;
-
                 //Looping until the player's input is valid.
                 boolean valid = false;
                 do {
@@ -28,7 +25,7 @@ public class Main {
                     String[] inputArr = input.split(" ");
 
                     //Check if user input is valid
-                    if (!board.isInputValid(inputArr)) continue;
+                    if (!Board.isInputValid(inputArr)) continue;
 
                     //Convert the input to array indices
                     int[][] coordinateArr = new int[inputArr.length][2];
@@ -40,7 +37,7 @@ public class Main {
 
                     //Check if the move (or moves if chained) are valid
                     boolean mustKill = false;
-                    if (coordinateArr.length>2) mustKill = true; //If chaining moves, all moves must be ones to kill the enemey piece
+                    if (coordinateArr.length>2) mustKill = true; //If chaining moves, all moves must be ones to kill the enemy piece
                     for (int i=0; i< coordinateArr.length-1; i++) {
                         int[][] path = Arrays.copyOfRange(coordinateArr, i, i+2);
                         Screen.println(Arrays.toString(path[0])+""+Arrays.toString(path[1]));
@@ -56,9 +53,6 @@ public class Main {
                             break;
                         }
                     }
-
-                    //If valid == true, then we don't need to ask the user for input again
-                    if (valid) break;
                 } while(!valid);
 
                 //Switching the turn variable.
