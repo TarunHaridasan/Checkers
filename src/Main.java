@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         //Initializing the title screen.
-        //TitleScreen.initialize();
+        TitleScreen.initialize();
         /*
             2:28PM on March 30, 2021.
             Jason Su wrote the baseline loop code and input for user.

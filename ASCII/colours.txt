@@ -1,0 +1,19 @@
+                        ┌───────────────────────────┐
+                        │ 1. Black                  │
+                        │                           │
+                        │ 2. Red                    │
+                        │                           │
+                        │ 3. Green                  │
+                        │                           │
+                        │ 4. Yellow                 │
+                        │                           │
+                        │ 5. Blue                   │
+                        │                           │
+                        │ 6. Purple                 │
+                        │                           │
+                        │ 7. Cyan                   │
+                        │                           │
+                        │ 8. White                  │
+                        └───────────────────────────┘
+                    Enter the number of the colour you want.
+                             Enter 0 to go back.

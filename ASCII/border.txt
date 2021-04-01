@@ -1,0 +1,5 @@
+            ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+            │             Enter a character that you wish to represent the borders on the board.               │
+            │  If you enter more than one character, the first character of your message will simply be taken  │
+            │                                        as the input.                                             │
+            └──────────────────────────────────────────────────────────────────────────────────────────────────┘
