@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 public class Piece {
     //Declare variables
@@ -44,7 +43,7 @@ public class Piece {
         int directionMultiplier = 1;
         if (side) directionMultiplier = -1;
 
-        //Try regular piece, regular move (INTEGRATE FOR KING)
+        //Regular move
         int x = pos[0] + directionMultiplier;
         for (int i=-1; i<=1; i+=2) {
             int y = pos[1] + i;
@@ -52,17 +51,16 @@ public class Piece {
                 moves.add(new int[] {x, y});
         }
 
-        //Try regular piece, attack move
+        //Attack move
         x = pos[0] + (directionMultiplier*2);
         for (int i=-2; i<=2; i+=4) {
             int y = pos[1]+i;
-            if (board.isValidMove(new int[][] {pos, {x,y}}, side, false))
-                moves.add(new int[] {x,y});
+            if (board.isValidMove(new int[][] {pos, {x,y}}, side, false)) moves.add(new int[] {x,y});
         }
 
         //If king, allow backwards moves
         if (isKing) {
-            //Try regular piece, regular move (INTEGRATE FOR KING)
+            //Try regular piece, regular move
             x = pos[0] + (directionMultiplier*-1);
             for (int i=-1; i<=1; i+=2) {
                 int y = pos[1] + i;
@@ -82,6 +80,27 @@ public class Piece {
         int[][] newMoves= new int[moves.size()][2];
         moves.toArray(newMoves);
         return newMoves;
+    }
+
+    //This recursive method is used to calculate all the possible chain moves for a piece
+    public List<int[]> visualizeChain(Board board) {
+        List<int[]> moves = new ArrayList<>();
+        int directionMultiplier = 1;
+        if (side) directionMultiplier = -1;
+        //Attack move
+        int x = this.pos[0] + (directionMultiplier*2);
+        for (int i=-2; i<=2; i+=4) {
+            int y = this.pos[1]+i;
+            if (board.isValidMove(new int[][] {this.pos, {x,y}}, this.side, true)) {
+               Board simulatorBoard = Board.cloner.deepClone(board);
+               Piece simulatorPiece = simulatorBoard.getPiece(this.pos);
+               int[] endPoint = {x, y};
+               simulatorBoard.move(simulatorPiece, endPoint);
+               moves.add(endPoint);
+               moves.addAll(simulatorPiece.visualizeChain(simulatorBoard));
+            }
+        }
+        return moves;
     }
 
     @Override

@@ -1,5 +1,3 @@
-import com.rits.cloning.Cloner;
-
 import java.util.*;
 
 public class AI {
@@ -45,7 +43,7 @@ public class AI {
                     //Visualize all possible piece locations
                     int[][] movesForPiece = piece.visualize(board);
                     //Throw the moves for the piece into movesForBoard map
-                    movesForBoard.put(new int[] {piece.pos[0], piece.pos[1]}, movesForPiece);
+                    movesForBoard.put(new int[] {i, j}, movesForPiece);
                 }
             }
         }
@@ -68,8 +66,7 @@ public class AI {
                 int[][] value = entry.getValue();
                 for (int[] i : value) {
                     //Make deep clone if board
-                    Cloner cloner = new Cloner();
-                    Board simulator = cloner.deepClone(board);
+                    Board simulator = Board.cloner.deepClone(board);
                     //Simulate the piece move
                     Piece piece = simulator.getPiece(key);
                     simulator.move(piece, i);
@@ -95,8 +92,7 @@ public class AI {
                 int[][] value = entry.getValue();
                 for (int[] i : value) {
                     //Make deep clone if board
-                    Cloner cloner = new Cloner();
-                    Board simulator = cloner.deepClone(board);
+                    Board simulator = board.cloner.deepClone(board);
                     //Simulate the piece move
                     Piece piece = simulator.getPiece(key);
                     simulator.move(piece, i);

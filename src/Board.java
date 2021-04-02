@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.io.*;
+import com.rits.cloning.Cloner;
 
 public class Board {
     Piece[][] board = new Piece[8][8];
@@ -15,6 +12,7 @@ public class Board {
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
     public static String firstChars = "abcedefgh", secondChars = "12345678";
+    public static Cloner cloner = new Cloner();
 
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
@@ -39,8 +37,10 @@ public class Board {
          */
 
 
+        board[5][3] = new Piece(false, "X", new int[]{5, 3}, computerColor);
         board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
         board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
+        board[1][5] = new Piece(false, "X", new int[]{1, 5}, computerColor);
 
         /*
         //Generate the player pieces (Bottom of the board)
@@ -54,7 +54,7 @@ public class Board {
          */
 
 
-        board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
+        board[6][4] = new Piece(true, "O", new int[]{6, 4}, playerColor);
         //board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
 
 
@@ -180,7 +180,4 @@ public class Board {
 
         return true;
     }
-
-    //This method is used to deep clone objects for visualization, so that changes are not made to the original board
-
 }

@@ -1,9 +1,6 @@
-import com.rits.cloning.Cloner;
-
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -36,8 +33,7 @@ public class Main {
                     for (int i=0; i< inputArr.length; i++) coordinateArr[i] = board.toCoords(inputArr[i]);
 
                     //Deep clone the original array in case one of the move in the chain is valid
-                    Cloner cloner = new Cloner();
-                    Piece[][] originalBoard = cloner.deepClone(board.board);
+                    Piece[][] originalBoard = Board.cloner.deepClone(board.board);
 
                     //Check if the move (or moves if chained) are valid
                     boolean mustKill = false;
