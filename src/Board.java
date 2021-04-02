@@ -25,7 +25,7 @@ public class Board {
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
 
-        /*
+
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -34,15 +34,10 @@ public class Board {
             }
         }
 
-         */
+
+        //board[1][1] = new Piece(false, "X", new int[]{1, 1}, computerColor);
 
 
-        board[5][3] = new Piece(false, "X", new int[]{5, 3}, computerColor);
-        board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
-        board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
-        board[1][5] = new Piece(false, "X", new int[]{1, 5}, computerColor);
-
-        /*
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -51,10 +46,13 @@ public class Board {
             }
         }
 
-         */
+        //board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
+        //board[4][2] = new Piece(true, "O", new int[]{4, 2}, playerColor);
+        //board[6][2] = new Piece(true, "O", new int[]{6, 2}, playerColor);
 
 
-        board[6][4] = new Piece(true, "O", new int[]{6, 4}, playerColor);
+
+
         //board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
 
 

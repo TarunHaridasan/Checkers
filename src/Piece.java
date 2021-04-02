@@ -37,7 +37,7 @@ public class Piece {
     }
 
     //This method generates all the possible locations this piece can move to (This will be used for the AI)
-    public int[][] visualize(Board board) {
+    public List<int[]> visualize(Board board) {
         List<int[]> moves = new ArrayList<int[]>();
 
         int directionMultiplier = 1;
@@ -77,9 +77,7 @@ public class Piece {
             }
         }
 
-        int[][] newMoves= new int[moves.size()][2];
-        moves.toArray(newMoves);
-        return newMoves;
+        return moves;
     }
 
     //This recursive method is used to calculate all the possible chain moves for a piece

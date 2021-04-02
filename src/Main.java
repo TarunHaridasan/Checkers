@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -22,6 +24,19 @@ public class Main {
                 //Looping until the player's input is valid.
                 boolean valid = false;
                 do {
+                    /*
+                    HashMap<int[], int[][]> moves = AI.visualize(board, false);
+                    for (Map.Entry<int[], int[][]> entry : moves.entrySet()) {
+                        int[] key = entry.getKey();
+                        int[][] value = entry.getValue();
+                        System.out.print(Arrays.toString(key)+": ");
+                        for (int[] i : value) {
+                            System.out.print(Arrays.toString(i)+" ");
+                        }
+                        System.out.println();
+                    }
+
+                     */
                     String input = Screen.prompt("Input: ");
                     String[] inputArr = input.split(" ");
 
@@ -74,7 +89,7 @@ public class Main {
                 }
                 */
 
-                AI.MinimaxReturnType computerMove = AI.minimax(board, 5, false);
+                AI.MinimaxReturnType computerMove = AI.minimax(board, 3, false);
                 System.out.println("Score: "+computerMove.score);
                 System.out.println("Piece: "+Arrays.toString(computerMove.piece.pos)+"  Icon: "+computerMove.piece.icon);
                 System.out.println("End point: "+Arrays.toString(computerMove.end));

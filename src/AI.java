@@ -41,8 +41,14 @@ public class AI {
                 Piece piece = board.board[i][j];
                 if (piece!=null && piece.side == turn) {
                     //Visualize all possible piece locations
-                    int[][] movesForPiece = piece.visualize(board);
-                    //Throw the moves for the piece into movesForBoard map
+                    List<int[]> moves = piece.visualize(board);
+                    //List<int[]> chainMoves = piece.visualizeChain(board);
+                    //chainMoves.remove(0);
+                    //Merge all locations and convert to array
+                    //moves.addAll(chainMoves);
+                    int[][] movesForPiece = new int[moves.size()][2];
+                    moves.toArray(movesForPiece);
+                    //Throw the regular moves and chain moves for the piece into movesForBoard map
                     movesForBoard.put(new int[] {i, j}, movesForPiece);
                 }
             }
@@ -52,7 +58,11 @@ public class AI {
 
     //This method uses the minimax algorithm to calculate the best possible piece
     public static MinimaxReturnType minimax(Board board, int depth, boolean side) {
-        if (depth==0 || board.isGameOver()) {
+        if (board.isGameOver()) {
+            if (side) return new MinimaxReturnType(Integer.MIN_VALUE);
+            else return new MinimaxReturnType(Integer.MAX_VALUE);
+        }
+        if (depth==0) {
             return new MinimaxReturnType(AI.score(board.board));
         }
 
