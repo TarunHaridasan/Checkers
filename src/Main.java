@@ -2,11 +2,13 @@ import com.rits.cloning.Cloner;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         //Initializing the title screen.
-        TitleScreen.initialize();
+        //TitleScreen.initialize();
         /*
             2:28PM on March 30, 2021.
             Jason Su wrote the baseline loop code and input for user.
@@ -62,7 +64,28 @@ public class Main {
             }
             //AI turn.
             else {
-                Screen.println("Computer does its turn...");
+                /*
+                //Testing the AI
+                HashMap<int[], int[][]> moves = AI.visualize(board, true);
+                for (Map.Entry<int[], int[][]> entry: moves.entrySet()) {
+                    int[] key = entry.getKey();
+                    System.out.print(Arrays.toString(key)+": ");
+                    int[][] value = entry.getValue();
+                    for (int[] i : value) {
+                        System.out.print(Arrays.toString(i)+" ");
+                    }
+                    System.out.println();
+                }
+                */
+
+                AI.MinimaxReturnType computerMove = AI.minimax(board, 1, false);
+                System.out.println("Score: "+computerMove.score);
+                System.out.println("Piece: "+Arrays.toString(computerMove.piece.pos)+"  Icon: "+computerMove.piece.icon);
+                System.out.println("End point: "+Arrays.toString(computerMove.end));
+                board.move(computerMove.piece, computerMove.end);
+
+                Screen.println("AI does its turn");
+                Thread.sleep(1000);
                 player = true;
             }
 

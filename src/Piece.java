@@ -38,8 +38,8 @@ public class Piece {
     }
 
     //This method generates all the possible locations this piece can move to (This will be used for the AI)
-    public Integer[][] visualize(Board board) {
-        List<Integer[]> moves = new ArrayList<Integer[]>();
+    public int[][] visualize(Board board) {
+        List<int[]> moves = new ArrayList<int[]>();
 
         int directionMultiplier = 1;
         if (side) directionMultiplier = -1;
@@ -49,7 +49,7 @@ public class Piece {
         for (int i=-1; i<=1; i+=2) {
             int y = pos[1] + i;
             if (board.isValidMove(new int[][] {pos, {x, y}}, side, false))
-                moves.add(new Integer[] {x, y});
+                moves.add(new int[] {x, y});
         }
 
         //Try regular piece, attack move
@@ -57,10 +57,10 @@ public class Piece {
         for (int i=-2; i<=2; i+=4) {
             int y = pos[1]+i;
             if (board.isValidMove(new int[][] {pos, {x,y}}, side, false))
-                moves.add(new Integer[] {x,y});
+                moves.add(new int[] {x,y});
         }
 
-        Integer[][] newMoves= new Integer[moves.size()][2];
+        int[][] newMoves= new int[moves.size()][2];
         moves.toArray(newMoves);
         return newMoves;
     }
