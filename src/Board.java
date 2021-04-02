@@ -29,7 +29,6 @@ public class Board {
 
 
         //Generate the computer pieces (top of the board)
-        /*
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 == 0) //Alternate the placement
@@ -37,14 +36,11 @@ public class Board {
             }
         }
 
-         */
-
 
         //board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
-        board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
+        //board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
 
 
-        /*
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -52,11 +48,12 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, playerColor);
             }
         }
-         */
 
-
+        /*
         board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
         board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
+
+         */
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)

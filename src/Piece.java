@@ -60,6 +60,25 @@ public class Piece {
                 moves.add(new int[] {x,y});
         }
 
+        //If king, allow backwards moves
+        if (isKing) {
+            //Try regular piece, regular move (INTEGRATE FOR KING)
+            x = pos[0] + (directionMultiplier*-1);
+            for (int i=-1; i<=1; i+=2) {
+                int y = pos[1] + i;
+                if (board.isValidMove(new int[][] {pos, {x, y}}, side, false))
+                    moves.add(new int[] {x, y});
+            }
+
+            //Try regular piece, attack move
+            x = pos[0] + (directionMultiplier*-2);
+            for (int i=-2; i<=2; i+=4) {
+                int y = pos[1]+i;
+                if (board.isValidMove(new int[][] {pos, {x,y}}, side, false))
+                    moves.add(new int[] {x,y});
+            }
+        }
+
         int[][] newMoves= new int[moves.size()][2];
         moves.toArray(newMoves);
         return newMoves;

@@ -78,12 +78,11 @@ public class Main {
                 }
                 */
 
-                AI.MinimaxReturnType computerMove = AI.minimax(board, 1, false);
+                AI.MinimaxReturnType computerMove = AI.minimax(board, 3, false);
                 System.out.println("Score: "+computerMove.score);
                 System.out.println("Piece: "+Arrays.toString(computerMove.piece.pos)+"  Icon: "+computerMove.piece.icon);
                 System.out.println("End point: "+Arrays.toString(computerMove.end));
                 board.move(computerMove.piece, computerMove.end);
-
                 Screen.println("AI does its turn");
                 Thread.sleep(1000);
                 player = true;
