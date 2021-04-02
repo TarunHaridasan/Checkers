@@ -78,13 +78,13 @@ public class Main {
                 }
                 */
 
-                AI.MinimaxReturnType computerMove = AI.minimax(board, 3, false);
+                AI.MinimaxReturnType computerMove = AI.minimax(board, 5, false);
                 System.out.println("Score: "+computerMove.score);
                 System.out.println("Piece: "+Arrays.toString(computerMove.piece.pos)+"  Icon: "+computerMove.piece.icon);
                 System.out.println("End point: "+Arrays.toString(computerMove.end));
                 board.move(computerMove.piece, computerMove.end);
-                Screen.println("AI does its turn");
-                Thread.sleep(1000);
+                Screen.println("AI is thinking...");
+                //Thread.sleep(1000);
                 player = true;
             }
 
@@ -92,8 +92,12 @@ public class Main {
             Screen.refresh(board, 10);
 
             //Check if game over
-            if(board.isGameOver()) break;
+            if(board.isGameOver()) {
+                if (player==true) Screen.println("Game Over. Computer wins!");
+                else Screen.println("Game over. You win!");
+                break;
+            };
         }
-        Screen.println("Game Over!");
+
     }
 }
