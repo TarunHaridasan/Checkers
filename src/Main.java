@@ -25,15 +25,30 @@ public class Main {
                 boolean valid = false;
                 do {
                     /*
-                    HashMap<int[], int[][]> moves = AI.visualize(board, false);
-                    for (Map.Entry<int[], int[][]> entry : moves.entrySet()) {
+                    Piece piece = board.getPiece(new int[] {1, 1});
+                    List<Board> chainMoves = piece.visualizeChain(board);
+                    for (Board i : chainMoves) {
+                        Screen.printBoard(i);
+                    }
+                     */
+
+                    /*
+                    HashMap<int[], AI.VisualizeReturnType> moves = AI.visualize(board, false);
+                    for (Map.Entry<int[], AI.VisualizeReturnType> entry : moves.entrySet()) {
                         int[] key = entry.getKey();
-                        int[][] value = entry.getValue();
                         System.out.print(Arrays.toString(key)+": ");
-                        for (int[] i : value) {
+                        AI.VisualizeReturnType value = entry.getValue();
+                        List<int[]> reg = value.regularMoves;
+                        List<Board> chain = value.chainMoves;
+                        //Print reg
+                        for (int[] i : reg) {
                             System.out.print(Arrays.toString(i)+" ");
                         }
                         System.out.println();
+                        //Print chain
+                        for (Board i : chain) {
+                            Screen.printBoard(i);
+                        }
                     }
 
                      */
@@ -91,12 +106,11 @@ public class Main {
 
                 AI.MinimaxReturnType computerMove = AI.minimax(board, 3, false);
                 System.out.println("Score: "+computerMove.score);
-                System.out.println("Piece: "+Arrays.toString(computerMove.piece.pos)+"  Icon: "+computerMove.piece.icon);
-                System.out.println("End point: "+Arrays.toString(computerMove.end));
-                board.move(computerMove.piece, computerMove.end);
+                board = computerMove.board;
                 Screen.println("AI is thinking...");
                 //Thread.sleep(1000);
                 player = true;
+
             }
 
             //Refreshing the board after every turn.
