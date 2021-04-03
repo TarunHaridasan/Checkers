@@ -11,8 +11,8 @@ public class Board {
     String borderString = null; //BorderChar + Color
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
-    public static String firstChars = "abcedefgh", secondChars = "12345678";
-    public static Cloner cloner = new Cloner();
+    final static String FIRSTCHARS = "abcedefgh", SECONDCHARS = "12345678";
+    final static Cloner CLONER = new Cloner();
 
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
@@ -34,10 +34,6 @@ public class Board {
             }
         }
 
-
-        //board[1][1] = new Piece(false, "X", new int[]{1, 1}, computerColor);
-
-
         //Generate the player pieces (Bottom of the board)
         for (int i = 5; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -45,6 +41,11 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, playerColor);
             }
         }
+
+        //board[1][1] = new Piece(false, "X", new int[]{1, 1}, computerColor);
+
+
+
 
         //board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
         //board[4][2] = new Piece(true, "O", new int[]{4, 2}, playerColor);
@@ -127,7 +128,9 @@ public class Board {
         if (Math.abs(verticalDistance)==2 && Math.abs(horizontalDistance)==2) {
             board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)] = null;
         }
+        //Update the pieces position to end location
         piece.pos = end;
+        //In the game board array, set the end index to have the piece and the start index to an empty cell.
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
         //Check if the piece should be promoted to king
@@ -136,7 +139,7 @@ public class Board {
         }
     }
 
-    //This method checks if the game is over by examining if all of one side's pieces are dead.
+    //This method checks if all of one side's piece are dead to determine if the game is over.
     public Boolean isGameOver() {
         boolean isFoundX = false;
         boolean isFoundO = false;
@@ -144,9 +147,8 @@ public class Board {
             for (int j=0; j<8; j++) {
                 //Keep track of what types of pieces we have seen so far
                 if (board[i][j]==null) continue;
-                else if (board[i][j].side==true) isFoundO=true;
+                else if (board[i][j].side) isFoundO=true;
                 else isFoundX=true;
-
                 //If both types of pieces have been seen at least once, then the game is not over yet
                 if (isFoundO && isFoundX) return false;
             }
@@ -161,7 +163,6 @@ public class Board {
             Screen.println("You must enter more than just one set of coordinates! You may wish to re-read the help page.");
             return false;
         }
-
         //Check the formatting of each coordinate in array
         for (String current : input) {
             //Check the length of each string
@@ -170,12 +171,12 @@ public class Board {
                 return false;
             }
             //Check if the first character is a letter and the second is a number
-            if(!(Board.firstChars.contains(Character.toString(current.charAt((0))))) || !(Board.secondChars.contains(Character.toString(current.charAt((1)))))) {
+            if(!(Board.FIRSTCHARS.contains(Character.toString(current.charAt((0))))) || !(Board.SECONDCHARS.contains(Character.toString(current.charAt((1)))))) {
                 Screen.println("Invalid coordinates! The first character must be a character between a and h, and the second character must be a number from 1 to 8");
                 return false;
             }
         }
-
+        //If all checks have passed, then this input string must be valid
         return true;
     }
 }

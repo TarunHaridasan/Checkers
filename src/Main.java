@@ -48,7 +48,7 @@ public class Main {
                     for (int i=0; i< inputArr.length; i++) coordinateArr[i] = board.toCoords(inputArr[i]);
 
                     //Deep clone the original array in case one of the move in the chain is valid
-                    Piece[][] originalBoard = Board.cloner.deepClone(board.board);
+                    Piece[][] originalBoard = Board.CLONER.deepClone(board.board);
 
                     //Check if the move (or moves if chained) are valid
                     boolean mustKill = false;

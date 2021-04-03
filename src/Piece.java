@@ -26,17 +26,7 @@ public class Piece {
         else icon = "!"; //X king
     }
 
-    //This method changes the position of the piece
-    public void updatePos(int[] end) {
-        pos = end;
-    }
-
-    //This method kills a piece
-    public void kill() {
-        isAlive = true;
-    }
-
-    //This method generates all the possible locations this piece can move to (This will be used for the AI)
+    //This method generates all the possible locations this piece  can move to (This will be used for the AI)
     public List<int[]> visualize(Board board) {
         List<int[]> moves = new ArrayList<int[]>();
 
@@ -90,7 +80,7 @@ public class Piece {
         for (int i=-2; i<=2; i+=4) {
             int y = this.pos[1]+i;
             if (board.isValidMove(new int[][] {this.pos, {x,y}}, this.side, true)) {
-               Board simulatorBoard = Board.cloner.deepClone(board);
+               Board simulatorBoard = Board.CLONER.deepClone(board);
                Piece simulatorPiece = simulatorBoard.getPiece(this.pos);
                int[] endPoint = {x, y};
                simulatorBoard.move(simulatorPiece, endPoint);

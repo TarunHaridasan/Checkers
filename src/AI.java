@@ -19,14 +19,22 @@ public class AI {
     //This method calculates the score of a board arrangement
     public static int score(Piece[][] board) {
         int score = 0;
+        //Loop through the board
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 Piece piece = board[i][j];
+                //If a piece is located in this cell, then decide how many points it is worth
                 if (piece!=null) {
-                    if (piece.side==true)
+                    //A player's piece will increase the score (Regular piece = 1 point, King = 2 point)
+                    if (piece.side) {
+                        if (piece.isKing) score+=1;
                         score+=1;
-                    else
+                    }
+                    //Enemy piece will reduce the score. (Regular piece = -1 point, King = -2 point)
+                    else {
+                        if (piece.isKing) score-=1;
                         score-=1;
+                    }
                 }
             }
         }
@@ -36,9 +44,11 @@ public class AI {
     //This method visualizes all possible board outcomes for this turn.
     public static HashMap<int[], int[][]> visualize(Board board, boolean turn) {
         HashMap<int[], int[][]> movesForBoard = new HashMap<int[], int[][]>();
+        //Loop through all cells in the board
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 Piece piece = board.board[i][j];
+                //If the cell is not empty and it is our turn to move it, then determine all possible end points
                 if (piece!=null && piece.side == turn) {
                     //Visualize all possible piece locations
                     List<int[]> moves = piece.visualize(board);
@@ -46,9 +56,10 @@ public class AI {
                     //chainMoves.remove(0);
                     //Merge all locations and convert to array
                     //moves.addAll(chainMoves);
+                    //Convert the arrayList to a 2D integer array
                     int[][] movesForPiece = new int[moves.size()][2];
                     moves.toArray(movesForPiece);
-                    //Throw the regular moves and chain moves for the piece into movesForBoard map
+                    //Generate a map where the position of the current piece is the key and a 2D array of all its possibles moves is the value.
                     movesForBoard.put(new int[] {i, j}, movesForPiece);
                 }
             }
@@ -76,7 +87,7 @@ public class AI {
                 int[][] value = entry.getValue();
                 for (int[] i : value) {
                     //Make deep clone if board
-                    Board simulator = Board.cloner.deepClone(board);
+                    Board simulator = Board.CLONER.deepClone(board);
                     //Simulate the piece move
                     Piece piece = simulator.getPiece(key);
                     simulator.move(piece, i);
@@ -102,7 +113,7 @@ public class AI {
                 int[][] value = entry.getValue();
                 for (int[] i : value) {
                     //Make deep clone if board
-                    Board simulator = board.cloner.deepClone(board);
+                    Board simulator = board.CLONER.deepClone(board);
                     //Simulate the piece move
                     Piece piece = simulator.getPiece(key);
                     simulator.move(piece, i);
