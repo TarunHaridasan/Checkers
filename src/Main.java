@@ -1,8 +1,5 @@
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -104,7 +101,7 @@ public class Main {
                 }
                 */
 
-                AI.MinimaxReturnType computerMove = AI.minimax(board, 3, false);
+                AI.MinimaxReturnType computerMove = AI.minimax(board, board.depthToSearch, false);
                 System.out.println("Score: "+computerMove.score);
                 board = computerMove.board;
                 Screen.println("AI is thinking...");
