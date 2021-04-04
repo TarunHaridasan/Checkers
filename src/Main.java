@@ -1,12 +1,15 @@
+/*
+    Tarun Haridasan, Fahad Mateen, Jason Su
+    04/6/2021
+    Main.java
+    This is the main java file of the ICS4U checkers console game.
+ */
 import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        /*
-            2:28PM on March 30, 2021.
-            Jason Su wrote the baseline loop code and input for user.
-        */
+        /*************************************Jason Su- 2:28PM on March 30, 2021.**************************************/
         //Initializing the title screen.
         TitleScreen.initialize();
         //Asking for difficulty.
@@ -60,6 +63,7 @@ public class Main {
                 player = false;
             }
             //AI turn.
+            /*************************************Fahad Mateen- 6:05PM on March 31, 2021.**************************************/
             else {
                 AI.MinimaxReturnType computerMove = AI.minimax(board, difficulty, false);
                 board = computerMove.board;

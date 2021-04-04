@@ -1,3 +1,9 @@
+/*
+    Tarun Haridasan, Fahad Mateen, Jason Su
+    04/6/2021
+    Board.java
+    This java file contains the Board class which houses the game board and other game logic methods.
+ */
 import com.rits.cloning.Cloner;
 
 public class Board {
@@ -14,6 +20,7 @@ public class Board {
     final static String FIRSTCHARS = "abcedefgh", SECONDCHARS = "12345678";
     final static Cloner CLONER = new Cloner();
 
+    /*************************************Jason Su- 9:33 AM on March 26, 2021.**************************************/
     //Constructor
     public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
         //Get and store game settings from user
@@ -61,6 +68,7 @@ public class Board {
     public Piece getPiece(int[] coords) {
         return board[coords[0]][coords[1]];
     }
+    /*************************************Tarun Haridasan- 12:33 AM on March 26, 2021.**************************************/
     //This method checks all the conditions to verify if a move about to be made is valid
     public Boolean isValidMove(int[][] path, boolean turn, boolean mustKill) {
         //Check if both start and end locations are within boundary
@@ -89,6 +97,7 @@ public class Board {
             if ((verticalDistance==1 && turn==true && !isKing) || verticalDistance==-1 && turn==false && !isKing) return false;
             return true;
         }
+        /*************************************Tarun Haridasan-4:00 PM on March 29, 2021.**************************************/
         //Attack 2-diagonal space move
         else if (Math.abs(horizontalDistance)==2 && Math.abs(verticalDistance)==2){
             if ((verticalDistance==2 && turn==true && !isKing) || verticalDistance==-2 && turn==false && !isKing) return false;
@@ -122,6 +131,7 @@ public class Board {
         }
     }
 
+    /*************************************Tarun Haridasan- 3:00PM PM on April 4, 2021.**************************************/
     //This method checks if all of one side's piece are dead or if one team cannot make any moves to determine if the game is over.
     public Boolean isGameOver() {
         boolean isFoundX = false;
@@ -141,6 +151,7 @@ public class Board {
         return true;
     }
 
+    /*************************************Jason Su- 8:33 PM on April 1, 2021.**************************************/
     //This method checks if the input coordinates the user enters is valid and in the correct format
     public static Boolean isInputValid(String[] input) {
         //Check if the user only entered 1 value

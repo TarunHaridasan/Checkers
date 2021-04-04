@@ -1,6 +1,13 @@
-import java.util.*;
+/*
+    Tarun Haridasan, Fahad Mateen, Jason Su
+    04/6/2021
+    AI.java
+    This java file contains the class and methods that allow the AI to find the best move.
+ */
 
+import java.util.*;
 public class AI {
+    /*************************************Tarun Haridasan- 8:10PM on March 31, 2021.**************************************/
     //This custom data structure allows the minimax algorithm to return 3 different data types
     public static class MinimaxReturnType {
         int score = 0;
@@ -14,6 +21,7 @@ public class AI {
             this.board = board;
         }
     }
+    /*************************************Tarun Haridasan- 4:50PM on March 30, 2021.**************************************/
     //This custom data structure allows the visualize algorithm to return 2 different data types
     public static class VisualizeReturnType {
         List<int[]> regularMoves = null;
@@ -23,6 +31,7 @@ public class AI {
             this.chainMoves = chainMoves;
         }
     }
+    /*************************************Tarun Haridasan- 1:10PM on March 30, 2021.**************************************/
     //This method calculates the score of a board arrangement
     public static int score(Piece[][] board) {
         int score = 0;
@@ -47,7 +56,7 @@ public class AI {
         }
         return score;
     }
-
+    /*************************************Tarun Haridasan- 4:26PM on March 30, 2021.**************************************/
     //This method visualizes all possible board outcomes for this turn.
     public static HashMap<int[], VisualizeReturnType> visualize(Board board, boolean turn) {
         HashMap<int[], VisualizeReturnType> movesForBoard = new HashMap<int[], VisualizeReturnType>();
@@ -69,7 +78,7 @@ public class AI {
         }
         return movesForBoard;
     }
-
+    /*************************************Tarun Haridasan- 7:50PM on March 31, 2021.**************************************/
     //This method uses the minimax algorithm to calculate the best possible piece
     public static MinimaxReturnType minimax(Board board, int depth, boolean side) {
 

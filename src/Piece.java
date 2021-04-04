@@ -1,6 +1,14 @@
+/*
+    Tarun Haridasan, Fahad Mateen, Jason Su
+    04/6/2021
+    Piece.java
+    This java file contains the Piece class which will be used to initialize each checker in the game.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 public class Piece {
+    /*************************************Jason Su- 2:00PM on March 26, 2021**************************************/
     //Declare variables
     Boolean side = false; //False = enemy, True = Player
     String icon = null;
@@ -19,6 +27,7 @@ public class Piece {
         this.id = pos[0]+""+pos[1];
     }
 
+    /*************************************Fahad Mateen- 5:45PM on March 26, 2021**************************************/
     //This method is used to promote the piece to a king
     public void promote() {
         isKing = true;
@@ -26,6 +35,7 @@ public class Piece {
         else icon = "!"; //X king
     }
 
+    /*************************************Tarun Haridasan- 11:56AM on March 27, 2021**************************************/
     //This method generates all the possible locations this piece  can move to (This will be used for the AI)
     public List<int[]> visualize(Board board) {
         List<int[]> moves = new ArrayList<int[]>();
@@ -70,6 +80,7 @@ public class Piece {
         return moves;
     }
 
+    /*************************************Tarun Haridasan- 1:25AM on April 3, 2021**************************************/
     //This recursive method is used to calculate all the possible chain moves for a piece
     public List<Board> visualizeChain(Board board) {
         List<Board> moves = new ArrayList<>();

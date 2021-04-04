@@ -2,19 +2,11 @@
   Jason Su, Tarun Haridasan, Fahad Mateen
   04/06/2021
   Title Screen Code
-  This class file contains the code for the title screen of our checkers game.
-  Each members' contribution to the project will be noted in this comments above the methods.
+  This java file contains the code for the title screen of our checkers game. The title screen is used to navigate to all the different screens, like help, about, load, and play, when the game launches
 */
 import java.io.*;
 import java.util.*;
-/*
-    10:21PM on March 25, 2021.
-    Jason Su finished up the template for the title screen with a placeholder for each required method.
-    3:35PM on March 26, 2021.
-    Jason Su finished the about method for the title screen and optimized the load game method.
-    3:50PM on March 26, 2021.
-    Jason Su finished the help method for the title screen.
-*/
+/*************************************Jason Su- 10:21AM on March 25, 2021.**************************************/
 public class TitleScreen {
     // Class variables.
     public static String username = "";
@@ -54,15 +46,7 @@ public class TitleScreen {
         //Load the saved game...
         Screen.println(load(code));
     }
-    /*
-        <->OVERALL EDIT HISTORY<->
-        10:21PM on March 25, 2021.
-        Fahad Mateen made the load function to read and get stuff from the file cause im a legend.
-        2:50PM on March 26, 2021.
-        Jason Su added comments and error handling to the code block below.
-        3:31PM on March 28, 2021.
-        Jason Su added compatibility for a settings page and added the empty boiler functions for Fahad.
-    */
+    /*************************************Fahad Mateen- 10:21PM on March 25, 2021.**************************************/
     public static String load(int code) throws IOException, InterruptedException {
         //Variables
         String filePath = "saves/" +code+".txt";
@@ -91,6 +75,7 @@ public class TitleScreen {
         //Returning the data object as a string.
         return data.toString();
     }
+    /*************************************Fahad Mateen- 11:10PM on March 25, 2021.**************************************/
     //About game.
     public static void about() throws IOException, InterruptedException {
         //Prints out the title of the game.
@@ -103,6 +88,7 @@ public class TitleScreen {
         //Going back to the main menu.
         mainMenu();
     }
+    /*************************************Fahad Mateen- 4:05PM on March 26, 2021.**************************************/
     //Help menu.
     public static void help() throws IOException, InterruptedException {
         //Prints out the title of the game.
@@ -115,6 +101,7 @@ public class TitleScreen {
         //Going back to the main menu.
         mainMenu();
     }
+    /*************************************Fahad Mateen and Jason Su optimized - 6:10PM on March 26, 2021.**************************************/
     //Settings menu.
     public static void settings() throws IOException, InterruptedException {
         //Prints out the title of the game.
@@ -263,10 +250,7 @@ public class TitleScreen {
             settings();
         }
     }
-    //Choices handler interface.
-    public static interface Choices {
-        void run() throws IOException, InterruptedException;
-    }
+    /*************************************Fahad Mateen- 10:46AM on April 2, 2021.**************************************/
     public static int difficulty() throws IOException, InterruptedException {
         //Asking for difficulty.
         Screen.printFromFile("./ASCII/difficulties.txt");
@@ -289,6 +273,11 @@ public class TitleScreen {
             return difficulty();
         }
         return difficulty;
+    }
+    /*************************************Jason Su- 2:10PM on March 26, 2021.**************************************/
+    //Choices handler interface.
+    public static interface Choices {
+        void run() throws IOException, InterruptedException;
     }
     //Choices array.
     public static Choices[] choices = new Choices[] {
@@ -318,6 +307,7 @@ public class TitleScreen {
         //Calling the input handling function...
         input();
     }
+    /*************************************Jason Su- 4:00PM on March 26, 2021.**************************************/
     public static void input() throws IOException, InterruptedException {
         int userInput = 0;
         //Asking for user input.
@@ -347,6 +337,7 @@ public class TitleScreen {
             mainMenu();
         }
     }
+    /*************************************Jason Su and Fahad- 12: 04PM on March 26, 2021.**************************************/
     //User input handling.
     public static boolean handleChoice(int userInput) throws IOException, InterruptedException {
         // Validating the user's input.

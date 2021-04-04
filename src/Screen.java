@@ -1,7 +1,14 @@
+/*
+    Tarun Haridasan, Fahad Mateen, Jason Su
+    04/6/2021
+    Screen.java
+    This java file contains the Screen class. The screen class is used for printing items to the screen, like ASCII text or the board, and collecting input from the user.
+ */
 import java.io.*;
 import java.util.*;
 
 public class Screen {
+    /*************************************Tarun Haridasan- 11:50AM on March 25, 2021.**************************************/
     //Mapping color to color codes
     final static Map<String, String> COLORCODES = new HashMap<String, String>() {{
         put("BLACK", "\u001B[30m");
@@ -15,6 +22,7 @@ public class Screen {
         put("WHITE", "\u001B[37m");
     }};
 
+    /*************************************Tarun Haridasan- 9:50AM on March 27, 2021.**************************************/
     //This method prints the checker board onto the console window with the right formatting
     public static void printBoard(Board board) {
         //Print the horizontal ruler
@@ -66,6 +74,7 @@ public class Screen {
         }
     }
 
+    /*************************************Fahad Mateen- 7:05PM on March 27, 2021.**************************************/
     //This command clears the console window (It adds lots of spaces)
     public static void clear(int space) {
         for (int i=0; i<space; i++) {
@@ -79,6 +88,7 @@ public class Screen {
         printBoard(board);
     }
 
+    /*************************************Jason Su- 10:50PM on March 28, 2021.**************************************/
     //This command reads from ASCII file and prints it
     public static void printFromFile(String fp) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fp));
@@ -89,6 +99,7 @@ public class Screen {
         }
     }
 
+    /*************************************Jason Su- 2:53PM on March 29, 2021.**************************************/
     //Shortcut print and println.
     public static void print(String message) {
         System.out.print(message);
@@ -97,10 +108,6 @@ public class Screen {
         System.out.println(message);
     }
 
-    /*
-        2:53PM on March 29, 2021.
-        Jason Su added a shortcut method in order to quickly get user input.
-    */
     //Shortcut prompt method.
     public static String prompt(String message) {
         //Variables and scanner
