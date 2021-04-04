@@ -13,9 +13,10 @@ public class Board {
     int sideLength = 0;
     final static String FIRSTCHARS = "abcedefgh", SECONDCHARS = "12345678";
     final static Cloner CLONER = new Cloner();
+    int depthToSearch = 0;
 
     //Constructor
-    public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
+    public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing, int depthToSearch) {
         //Get and store game settings from user
         computerColor = compCol;
         playerColor = playerCol;
@@ -24,7 +25,7 @@ public class Board {
         borderString = Screen.COLORCODES.get(borderColor)+borderChar+Screen.COLORCODES.get("RESET")+" ";
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
-
+        depthToSearch = this.depthToSearch;
 
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
@@ -42,19 +43,19 @@ public class Board {
             }
         }
 
-        //board[1][1] = new Piece(false, "X", new int[]{1, 1}, computerColor);
 
+        /*
+        board[5][5] = new Piece(false, "X", new int[]{5, 5}, computerColor);
+        board[3][3] = new Piece(false, "X", new int[]{3, 3}, computerColor);
+        board[1][3] = new Piece(false, "X", new int[]{1, 3}, computerColor);
 
+        board[7][5] = new Piece(true, "O", new int[]{7, 5}, playerColor);
+        board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
 
+        board[5][2] = new Piece(false, "X", new int[]{5, 2}, computerColor);
+        board[6][1] = new Piece(true, "O", new int[]{6, 1}, playerColor);
 
-        //board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
-        //board[4][2] = new Piece(true, "O", new int[]{4, 2}, playerColor);
-        //board[6][2] = new Piece(true, "O", new int[]{6, 2}, playerColor);
-
-
-
-
-        //board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
+         */
 
 
     }

@@ -71,8 +71,8 @@ public class Piece {
     }
 
     //This recursive method is used to calculate all the possible chain moves for a piece
-    public List<int[]> visualizeChain(Board board) {
-        List<int[]> moves = new ArrayList<>();
+    public List<Board> visualizeChain(Board board) {
+        List<Board> moves = new ArrayList<>();
         int directionMultiplier = 1;
         if (side) directionMultiplier = -1;
         //Attack move
@@ -84,7 +84,7 @@ public class Piece {
                Piece simulatorPiece = simulatorBoard.getPiece(this.pos);
                int[] endPoint = {x, y};
                simulatorBoard.move(simulatorPiece, endPoint);
-               moves.add(endPoint);
+               moves.add(simulatorBoard);
                moves.addAll(simulatorPiece.visualizeChain(simulatorBoard));
             }
         }
