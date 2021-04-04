@@ -22,6 +22,7 @@ public class TitleScreen {
     public static String compColour = "BLUE", playerColour = "RED", borderColour = "GREEN";
     public static char borderChar = '.';
     public static int cellSpacing = 1;
+    public static Boolean turn = true;
     //Choice functions.
     //Play game.
     public static void play() {
@@ -265,6 +266,29 @@ public class TitleScreen {
     //Choices handler interface.
     public static interface Choices {
         void run() throws IOException, InterruptedException;
+    }
+    public static int difficulty() throws IOException, InterruptedException {
+        //Asking for difficulty.
+        Screen.printFromFile("./ASCII/difficulties.txt");
+        //Getting the user's input.
+        int difficulty = 0;
+        try {
+            difficulty = Integer.parseInt(Screen.prompt("Input: "));
+        } catch(NumberFormatException err) {
+            //If the input cannot be converted into an integer, go back to the settings page.
+            Screen.println("That is an invalid option... Please try again!");
+            Screen.println("");
+            Thread.sleep(1000);
+            return difficulty();
+        }
+        if(difficulty < 1 || difficulty > 4) {
+            //If the input is out of range, go back to the settings page.
+            Screen.println("That is an invalid option... Please try again!");
+            Screen.println("");
+            Thread.sleep(1000);
+            return difficulty();
+        }
+        return difficulty;
     }
     //Choices array.
     public static Choices[] choices = new Choices[] {

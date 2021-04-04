@@ -1,0 +1,13 @@
+                             ┌─────────────────────────┐
+                             │                         │
+                             │      1. Beginner        │
+                             │                         │
+                             │      2. Easy            │
+                             │                         │
+                             │      3. Medium          │
+                             │                         │
+                             │      4. Hard            │
+                             │                         │
+                             └─────────────────────────┘
+                          Enter the number of the difficulty
+                                 you wish to choose.

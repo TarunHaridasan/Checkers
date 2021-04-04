@@ -25,7 +25,6 @@ public class Board {
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
 
-
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
