@@ -23,6 +23,8 @@ public class TitleScreen {
     public static char borderChar = '.';
     public static int cellSpacing = 1;
     public static Boolean turn = true;
+    public static int difficulty = 0;
+    public static Piece[][] loadedBoard = null;
     //Choice functions.
     //Play game.
     public static void play() {
@@ -52,7 +54,34 @@ public class TitleScreen {
             return;
         }
         //Load the saved game...
-        Screen.println(load(code));
+        String data = readSave(code);
+        String[] rows = data.split("\r\n");
+        //Setting the username and difficulty values.
+        String[] userData = rows[0].split(" ");
+        TitleScreen.username = userData[0];
+        TitleScreen.difficulty = Integer.parseInt(userData[1]);
+        //Recreating the board.
+        TitleScreen.loadedBoard = new Piece[8][8];
+        String[] boardString = Arrays.copyOfRange(rows, 1, rows.length);
+        for(int i = 0; i < boardString.length; i++) {
+            //Creating a temporary array of each piece.
+            String[] temp = boardString[i].split(" ");
+            //Deciding what to add to the board array.
+            for(int j = 0; j < temp.length; j++) {
+                if(temp[j].equals("O")) TitleScreen.loadedBoard[i][j] = null;
+                else if(temp[j].equals("P")) {
+                    int[] pos = {i, j};
+                    Piece tempPiece = new Piece(true, "X", pos, TitleScreen.playerColour);
+                    TitleScreen.loadedBoard[i][j] = tempPiece;
+                }
+                else {
+                    int[] pos = {i, j};
+                    Piece tempPiece = new Piece(false, "X", pos, TitleScreen.playerColour);
+                    TitleScreen.loadedBoard[i][j] = tempPiece;
+                }
+            }
+        }
+        TitleScreen.play();
     }
     /*
         <->OVERALL EDIT HISTORY<->
@@ -63,7 +92,7 @@ public class TitleScreen {
         3:31PM on March 28, 2021.
         Jason Su added compatibility for a settings page and added the empty boiler functions for Fahad.
     */
-    public static String load(int code) throws IOException, InterruptedException {
+    public static String readSave(int code) throws IOException, InterruptedException {
         //Variables
         String filePath = "saves/" +code+".txt";
         BufferedReader file = null;
@@ -82,10 +111,12 @@ public class TitleScreen {
         }
         //Creating a string builder for building the contents of the file.
         StringBuilder data = new StringBuilder(file.readLine());
+        //String array for rows of the board.
+        String[][] boardFile = new String[8][8];
         String line = file.readLine();
         //Looping through the entire file and concatenating a data string.
         while (line != null) {
-            data.append("\n").append(line);
+            data.append("\r\n").append(line);
             line = file.readLine();
         }
         //Returning the data object as a string.
