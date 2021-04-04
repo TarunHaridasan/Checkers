@@ -59,7 +59,7 @@ public class AI {
                 if (piece!=null && piece.side == turn) {
                     //Visualize all regular piece locations
                     List<int[]> regMoves = piece.visualize(board);
-                    //Visualize all chained moves and convert list to array
+                    //Visualize all chained moves
                     List<Board> chainMoves = piece.visualizeChain(board);
                     if (chainMoves.size()>0) chainMoves.remove(0);
                     //Generate a map where the position of the current piece is the key and an array of all its possibles moves is the value.
