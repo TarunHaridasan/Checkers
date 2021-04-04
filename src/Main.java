@@ -11,7 +11,6 @@ public class Main {
         TitleScreen.initialize();
         //Asking for difficulty.
         int difficulty = TitleScreen.difficulty();
-        Screen.println(String.valueOf(difficulty));
         //Starting the board.
         Board board = new Board(TitleScreen.compColour, TitleScreen.playerColour, TitleScreen.borderColour, TitleScreen.borderChar, TitleScreen.cellSpacing);
         //Loading the board from the save, or defaulting the board if no save was loaded.
@@ -106,7 +105,7 @@ public class Main {
                 }
                 */
 
-                AI.MinimaxReturnType computerMove = AI.minimax(board, board.depthToSearch, false);
+                AI.MinimaxReturnType computerMove = AI.minimax(board, difficulty, false);
                 System.out.println("Score: "+computerMove.score);
                 board = computerMove.board;
                 Screen.println("AI is thinking...");

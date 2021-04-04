@@ -13,10 +13,9 @@ public class Board {
     int sideLength = 0;
     final static String FIRSTCHARS = "abcedefgh", SECONDCHARS = "12345678";
     final static Cloner CLONER = new Cloner();
-    int depthToSearch = 0;
 
     //Constructor
-    public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing, int depthToSearch) {
+    public Board(String compCol, String playerCol, String borderCol, char borderChar, int cellSpacing) {
         //Get and store game settings from user
         computerColor = compCol;
         playerColor = playerCol;
@@ -25,7 +24,6 @@ public class Board {
         borderString = Screen.COLORCODES.get(borderColor)+borderChar+Screen.COLORCODES.get("RESET")+" ";
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
-        depthToSearch = this.depthToSearch;
 
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
