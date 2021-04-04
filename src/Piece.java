@@ -75,7 +75,7 @@ public class Piece {
         List<Board> moves = new ArrayList<>();
         int directionMultiplier = 1;
         if (side) directionMultiplier = -1;
-        //Attack move
+        //Attack move - regular
         int x = this.pos[0] + (directionMultiplier*2);
         for (int i=-2; i<=2; i+=4) {
             int y = this.pos[1]+i;
@@ -86,6 +86,19 @@ public class Piece {
                simulatorBoard.move(simulatorPiece, endPoint);
                moves.add(simulatorBoard);
                moves.addAll(simulatorPiece.visualizeChain(simulatorBoard));
+            }
+        }
+        //Attack move- king
+        x = this.pos[0] + (directionMultiplier*-2);
+        for (int i=-2; i<=2; i+=4) {
+            int y = this.pos[1]+i;
+            if (board.isValidMove(new int[][] {this.pos, {x,y}}, this.side, true)) {
+                Board simulatorBoard = Board.CLONER.deepClone(board);
+                Piece simulatorPiece = simulatorBoard.getPiece(this.pos);
+                int[] endPoint = {x, y};
+                simulatorBoard.move(simulatorPiece, endPoint);
+                moves.add(simulatorBoard);
+                moves.addAll(simulatorPiece.visualizeChain(simulatorBoard));
             }
         }
         return moves;
