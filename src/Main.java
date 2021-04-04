@@ -6,18 +6,23 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        //Initializing the title screen.
-        //TitleScreen.initialize();
         /*
             2:28PM on March 30, 2021.
             Jason Su wrote the baseline loop code and input for user.
         */
+        //Initializing the title screen.
+        TitleScreen.initialize();
+        //Asking for difficulty.
+        int difficulty = TitleScreen.difficulty();
+        Screen.println(String.valueOf(difficulty));
         //Starting the board.
         Board board = new Board(TitleScreen.compColour, TitleScreen.playerColour, TitleScreen.borderColour, TitleScreen.borderChar, TitleScreen.cellSpacing);
+        //Loading the board from the save, or defaulting the board if no save was loaded.
+        //board.board = TitleScreen.board;
         Screen.printBoard(board);
 
         //Main game loop.
-        boolean player = true;
+        boolean player = TitleScreen.turn;
         while(true) {
             //Player turn.
             if(player) {
@@ -104,7 +109,7 @@ public class Main {
 
             //Check if game over
             if(board.isGameOver()) {
-                if (player==true) Screen.println("Game Over. Computer wins!");
+                if (player) Screen.println("Game Over. Computer wins!");
                 else Screen.println("Game over. You win!");
                 break;
             };
