@@ -61,7 +61,10 @@ public class Main {
                             for(Piece current : row) {
                                 //Deciding what character to write to the space on the file.
                                 if(current == null) file.write('O');
-                                else if(current.side) file.write('P');
+                                else if(current.side)
+                                    if(current.isKing)file.write('K');
+                                    else file.write('P');
+                                else if(current.isKing)file.write('k');
                                 else file.write('C');
                                 file.write(' ');
                             }

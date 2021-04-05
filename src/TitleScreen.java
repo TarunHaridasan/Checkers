@@ -68,16 +68,36 @@ public class TitleScreen {
             String[] temp = boardString[i].split(" ");
             //Deciding what to add to the board array.
             for(int j = 0; j < temp.length; j++) {
-                if(temp[j].equals("O")) TitleScreen.loadedBoard[i][j] = null;
-                else if(temp[j].equals("P")) {
-                    int[] pos = {i, j};
-                    Piece tempPiece = new Piece(true, "X", pos, TitleScreen.playerColour);
-                    TitleScreen.loadedBoard[i][j] = tempPiece;
-                }
-                else {
-                    int[] pos = {i, j};
-                    Piece tempPiece = new Piece(false, "X", pos, TitleScreen.playerColour);
-                    TitleScreen.loadedBoard[i][j] = tempPiece;
+                switch (temp[j]) {
+                    case "O":
+                        TitleScreen.loadedBoard[i][j] = null;
+                        break;
+                    case "P": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(true, "O", pos, TitleScreen.playerColour);
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    case "C": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(false, "X", pos, TitleScreen.compColour);
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    case "K": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(true, "\uD83C\uDD7E", pos, TitleScreen.playerColour);
+                        tempPiece.isKing = true;
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    default: {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(false, "\uD83C\uDD87", pos, TitleScreen.compColour);
+                        tempPiece.isKing = true;
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
                 }
             }
         }
