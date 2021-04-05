@@ -25,7 +25,6 @@ public class Board {
         this.cellSpacing = cellSpacing;
         sideLength = (cellSpacing*8)+9;
 
-
         //Generate the computer pieces (top of the board)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
@@ -41,22 +40,6 @@ public class Board {
                     board[i][j] = new Piece(true, "O", new int[]{i, j}, playerColor);
             }
         }
-
-        //board[1][1] = new Piece(false, "X", new int[]{1, 1}, computerColor);
-
-
-
-
-        //board[2][2] = new Piece(true, "O", new int[]{2, 2}, playerColor);
-        //board[4][2] = new Piece(true, "O", new int[]{4, 2}, playerColor);
-        //board[6][2] = new Piece(true, "O", new int[]{6, 2}, playerColor);
-
-
-
-
-        //board[7][7] = new Piece(true, "O", new int[]{7, 7}, playerColor);
-
-
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
@@ -139,16 +122,18 @@ public class Board {
         }
     }
 
-    //This method checks if all of one side's piece are dead to determine if the game is over.
+    //This method checks if all of one side's piece are dead or if one team cannot make any moves to determine if the game is over.
     public Boolean isGameOver() {
         boolean isFoundX = false;
         boolean isFoundO = false;
+        //Loop through all board cells
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 //Keep track of what types of pieces we have seen so far
-                if (board[i][j]==null) continue;
-                else if (board[i][j].side) isFoundO=true;
-                else isFoundX=true;
+                Piece piece = getPiece(new int[] {i, j});
+                if (piece==null) continue;
+                if (board[i][j].side && piece.visualize(this).size()!=0) isFoundO=true;
+                else if (!board[i][j].side && piece.visualize(this).size()!=0) isFoundX=true;
                 //If both types of pieces have been seen at least once, then the game is not over yet
                 if (isFoundO && isFoundX) return false;
             }
