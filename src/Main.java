@@ -4,6 +4,8 @@
     Main.java
     This is the main java file of the ICS4U checkers console game.
  */
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -13,11 +15,14 @@ public class Main {
         //Initializing the title screen.
         TitleScreen.initialize();
         //Asking for difficulty.
-        int difficulty = TitleScreen.difficulty();
+        int difficulty = 0;
+        if(TitleScreen.loadedBoard == null) difficulty = TitleScreen.difficulty();
+        else difficulty = TitleScreen.difficulty;
         //Starting the board.
         Board board = new Board(TitleScreen.compColour, TitleScreen.playerColour, TitleScreen.borderColour, TitleScreen.borderChar, TitleScreen.cellSpacing);
         //Loading the board from the save, or defaulting the board if no save was loaded.
-        //board.board = TitleScreen.board;
+        if(TitleScreen.loadedBoard != null) board.board = TitleScreen.loadedBoard;
+        //Printing the board to the user.
         Screen.printBoard(board);
 
         //Main game loop.
@@ -29,6 +34,39 @@ public class Main {
                 boolean valid = false;
                 do {
                     String input = Screen.prompt("Input: ");
+                    if(input.equalsIgnoreCase("save")) {
+                        //Generating the random code.
+                        int code = 0;
+                        code = (int) Math.floor(Math.random()*(999999-100000+1)+100000);
+                        String codeString = String.valueOf(code);
+                        //Writing to the file.
+                        BufferedWriter file = new BufferedWriter(new FileWriter("./saves/"+codeString+".txt"));
+                        //Saving the player's name and difficulty value.
+                        file.write(TitleScreen.username + ' ' + String.valueOf(difficulty) + "\r\n");
+                        //Saving the player's board.
+                        for(Piece[] row : board.board) {
+                            for(Piece current : row) {
+                                //Deciding what character to write to the space on the file.
+                                if(current == null) file.write('O');
+                                else if(current.side)
+                                    if(current.isKing)file.write('K');
+                                    else file.write('P');
+                                else if(current.isKing)file.write('k');
+                                else file.write('C');
+                                file.write(' ');
+                            }
+                            //New line for each row.
+                            file.write("\r\n");
+                        }
+                        //Closing the file.
+                        file.close();
+                        //Telling the user the code.
+                        Screen.println("Your game has been saved! Here is your code: " + codeString);
+                        Screen.println("");
+                        //Returning to the main menu.
+                        Main.main(null);
+                        return;
+                    }
                     String[] inputArr = input.split(" ");
 
                     //Check if user input is valid
