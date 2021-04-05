@@ -101,17 +101,19 @@ public class Main {
                 player = false;
             }
             //AI turn.
-            /*************************************Fahad Mateen- 6:05PM on March 31, 2021.**************************************/
+            /* ************************************Fahad Mateen- 6:05PM on March 31, 2021.************************************* */
             else {
                 AI.MinimaxReturnType computerMove = AI.minimax(board, difficulty, false);
                 board = computerMove.board;
+                Screen.println("");
                 Screen.println("AI is thinking...");
-                //Thread.sleep(1000);
+                Screen.println("");
+                Thread.sleep(2500);
                 player = true;
             }
 
             //Refreshing the board after every turn.
-            Screen.refresh(board, 10);
+            Screen.refresh(board, 1);
 
             //Check if game over
             if(board.isGameOver()) {
