@@ -44,7 +44,7 @@ public class TitleScreen {
             //If the user enters something that cannot be parsed into an integer.
             Screen.println("");
             Screen.println("There was an unknown error... Please try again!");
-            //Going back to the main menu.
+            //Going back to the load menu.
             loadOpt();
             return;
         }
@@ -55,6 +55,7 @@ public class TitleScreen {
         }
         //Load the saved game...
         String data = readSave(code);
+        if(data.isEmpty()) return;
         String[] rows = data.split("\r\n");
         //Setting the username and difficulty values.
         String[] userData = rows[0].split(" ");
@@ -124,9 +125,9 @@ public class TitleScreen {
             //If the code was not found.
             Screen.println("");
             Screen.println("That is an invalid code. Please try again.");
-            //Return to the main menu.
+            //Return to the load menu.
             Thread.sleep(1000);
-            mainMenu();
+            loadOpt();
             return "";
         }
         //Creating a string builder for building the contents of the file.
