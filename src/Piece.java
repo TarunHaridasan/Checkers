@@ -31,8 +31,8 @@ public class Piece {
     //This method is used to promote the piece to a king
     public void promote() {
         isKing = true;
-        if (side) icon = "@"; //O king
-        else icon = "!"; //X king
+        if (side) icon = "\uD83C\uDD7E"; //O king
+        else icon = "\uD83C\uDD87"; //X king
     }
 
     /*************************************Tarun Haridasan- 11:56AM on March 27, 2021**************************************/
