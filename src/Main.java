@@ -108,7 +108,7 @@ public class Main {
                 Screen.println("");
                 Screen.println("AI is thinking...");
                 Screen.println("");
-                Thread.sleep(2500);
+                Thread.sleep(2000);
                 player = true;
             }
 

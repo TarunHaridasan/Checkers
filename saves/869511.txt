@@ -1,9 +1,0 @@
-Taru 4
-C O C O C O C O 
-O C O C O C O C 
-O O C O C O C O 
-O O O O O O O P 
-C O O O O O O O 
-O P O P O P O O 
-P O P O P O P O 
-O P O P O P O P 
