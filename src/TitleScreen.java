@@ -15,6 +15,8 @@ public class TitleScreen {
     public static char borderChar = '.';
     public static int cellSpacing = 1;
     public static Boolean turn = true;
+    public static int difficulty = 0;
+    public static Piece[][] loadedBoard = null;
     //Choice functions.
     //Play game.
     public static void play() {
@@ -34,7 +36,7 @@ public class TitleScreen {
             //If the user enters something that cannot be parsed into an integer.
             Screen.println("");
             Screen.println("There was an unknown error... Please try again!");
-            //Going back to the main menu.
+            //Going back to the load menu.
             loadOpt();
             return;
         }
@@ -44,10 +46,58 @@ public class TitleScreen {
             return;
         }
         //Load the saved game...
-        Screen.println(load(code));
+        String data = readSave(code);
+        if(data.isEmpty()) return;
+        String[] rows = data.split("\r\n");
+        //Setting the username and difficulty values.
+        String[] userData = rows[0].split(" ");
+        TitleScreen.username = userData[0];
+        TitleScreen.difficulty = Integer.parseInt(userData[1]);
+        //Recreating the board.
+        TitleScreen.loadedBoard = new Piece[8][8];
+        String[] boardString = Arrays.copyOfRange(rows, 1, rows.length);
+        for(int i = 0; i < boardString.length; i++) {
+            //Creating a temporary array of each piece.
+            String[] temp = boardString[i].split(" ");
+            //Deciding what to add to the board array.
+            for(int j = 0; j < temp.length; j++) {
+                switch (temp[j]) {
+                    case "O":
+                        TitleScreen.loadedBoard[i][j] = null;
+                        break;
+                    case "P": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(true, "O", pos, TitleScreen.playerColour);
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    case "C": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(false, "X", pos, TitleScreen.compColour);
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    case "K": {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(true, "\uD83C\uDD7E", pos, TitleScreen.playerColour);
+                        tempPiece.isKing = true;
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                    default: {
+                        int[] pos = {i, j};
+                        Piece tempPiece = new Piece(false, "\uD83C\uDD87", pos, TitleScreen.compColour);
+                        tempPiece.isKing = true;
+                        TitleScreen.loadedBoard[i][j] = tempPiece;
+                        break;
+                    }
+                }
+            }
+        }
+        TitleScreen.play();
     }
     /*************************************Fahad Mateen- 10:21PM on March 25, 2021.**************************************/
-    public static String load(int code) throws IOException, InterruptedException {
+    public static String readSave(int code) throws IOException, InterruptedException {
         //Variables
         String filePath = "saves/" +code+".txt";
         BufferedReader file = null;
@@ -59,17 +109,19 @@ public class TitleScreen {
             //If the code was not found.
             Screen.println("");
             Screen.println("That is an invalid code. Please try again.");
-            //Return to the main menu.
+            //Return to the load menu.
             Thread.sleep(1000);
-            mainMenu();
+            loadOpt();
             return "";
         }
         //Creating a string builder for building the contents of the file.
         StringBuilder data = new StringBuilder(file.readLine());
+        //String array for rows of the board.
+        String[][] boardFile = new String[8][8];
         String line = file.readLine();
         //Looping through the entire file and concatenating a data string.
         while (line != null) {
-            data.append("\n").append(line);
+            data.append("\r\n").append(line);
             line = file.readLine();
         }
         //Returning the data object as a string.
@@ -295,6 +347,8 @@ public class TitleScreen {
         //Getting username.
         username = Screen.prompt("Enter your name: ");
         //Calling the main menu method.
+        TitleScreen.loadedBoard = null;
+        TitleScreen.difficulty = 0;
         mainMenu();
     }
     //Printing the main menu.
@@ -321,7 +375,6 @@ public class TitleScreen {
             Screen.println("There was an unknown error... Please try again!");
             Thread.sleep(1000);
             //Going back to the main menu.
-            Thread.sleep(1000);
             mainMenu();
             return;
         }
