@@ -358,6 +358,8 @@ public class TitleScreen {
         //Getting username.
         username = Screen.prompt("Enter your name: ");
         //Calling the main menu method.
+        TitleScreen.loadedBoard = null;
+        TitleScreen.difficulty = 0;
         mainMenu();
     }
     //Printing the main menu.
