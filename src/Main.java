@@ -61,7 +61,7 @@ public class Main {
                         Screen.println("Your game has been saved! Here is your code: " + codeString);
                         Screen.println("");
                         //Returning to the main menu.
-                        TitleScreen.mainMenu();
+                        Main.main(null);
                         return;
                     }
                     String[] inputArr = input.split(" ");

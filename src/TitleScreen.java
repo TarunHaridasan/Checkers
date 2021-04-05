@@ -383,7 +383,6 @@ public class TitleScreen {
             Screen.println("There was an unknown error... Please try again!");
             Thread.sleep(1000);
             //Going back to the main menu.
-            Thread.sleep(1000);
             mainMenu();
             return;
         }
