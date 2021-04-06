@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        /*************************************Jason Su- 2:28PM on March 30, 2021.**************************************/
+        /* ************************************Jason Su- 2:28PM on March 30, 2021.************************************* */
         //Initializing the title screen.
         TitleScreen.initialize();
         //Asking for difficulty.
@@ -37,10 +37,10 @@ public class Main {
                 do {
                     String input = Screen.prompt("Input: ");
                     if(input.equalsIgnoreCase("save")) {
-                        //Generating the random code.
-                        int code = 0;
                         //Creating a file object for the saves directory.
                         File folder = new File("./saves/");
+                        //Generating the random code.
+                        int code = 0;
                         File[] saves = folder.listFiles();
                         //Making sure that the code is unique.
                         boolean validCode = true;
@@ -130,9 +130,14 @@ public class Main {
 
             //Check if game over
             if(board.isGameOver()) {
+                Screen.println("");
                 if (player) Screen.println("Game Over. Computer wins!");
                 else Screen.println("Game over. You win!");
-                break;
+                Screen.println("");
+                Screen.println("Going back to the main menu...");
+                Thread.sleep(1000);
+                Main.main(null);
+                return;
             };
         }
 

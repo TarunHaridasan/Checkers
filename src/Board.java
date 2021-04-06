@@ -123,18 +123,15 @@ public class Board {
         int verticalDistance = end[0]-start[0];
         int horizontalDistance = end[1] - start[1];
         //If its an attack move, remove the piece to be attacked from array
-        if (Math.abs(verticalDistance)==2 && Math.abs(horizontalDistance)==2) {
+        if (Math.abs(verticalDistance)==2 && Math.abs(horizontalDistance)==2)
             board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)] = null;
-        }
         //Update the pieces position to end location
         piece.pos = end;
         //In the game board array, set the end index to have the piece and the start index to an empty cell.
         board[end[0]][end[1]] = piece;
         board[start[0]][start[1]] = null;
         //Check if the piece should be promoted to king
-        if (piece.side && piece.pos[0]==0 || !piece.side && piece.pos[0]==7) {
-            piece.promote();
-        }
+        if (piece.side && piece.pos[0]==0 || !piece.side && piece.pos[0]==7) piece.promote();
     }
 
     /*************************************Tarun Haridasan- 3:00PM PM on April 4, 2021.**************************************/
