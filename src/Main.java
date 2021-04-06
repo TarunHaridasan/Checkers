@@ -5,6 +5,7 @@
     This is the main java file of the ICS4U checkers console game.
  */
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -37,7 +38,17 @@ public class Main {
                     if(input.equalsIgnoreCase("save")) {
                         //Generating the random code.
                         int code = 0;
-                        code = (int) Math.floor(Math.random()*(999999-100000+1)+100000);
+                        //Creating a file object for the saves directory.
+                        File folder = new File("./saves/");
+                        File[] saves = folder.listFiles();
+                        //Making sure that the code is unique.
+                        boolean validCode = true;
+                        do {
+                            validCode = true;
+                            code = (int) Math.floor(Math.random()*(999999-100000+1)+100000);
+                            assert saves != null;
+                            for (File current : saves) if(current.getName().equals(code + ".txt")) validCode = false;
+                        } while(!validCode);
                         String codeString = String.valueOf(code);
                         //Writing to the file.
                         BufferedWriter file = new BufferedWriter(new FileWriter("./saves/"+codeString+".txt"));
