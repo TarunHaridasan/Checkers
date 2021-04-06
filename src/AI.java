@@ -31,6 +31,11 @@ public class AI {
             this.chainMoves = chainMoves;
         }
     }
+    /*
+     ****************************************************************************************
+     *************** FUNCTION WITH 2D ARRAY AS A PARAMETER AND RETURN VALUE *****************
+     ****************************************************************************************
+    */
     /*************************************Tarun Haridasan- 1:10PM on March 30, 2021.**************************************/
     //This method calculates the score of a board arrangement
     public static int score(Piece[][] board) {
@@ -153,6 +158,11 @@ public class AI {
         }
     }
 
+    /*
+     ****************************************************************************************
+     ********* FUNCTION WITH 2D ARRAY AS A PARAMETER AND 2D ARRAY RETURN VALUE **************
+     ****************************************************************************************
+    */
     /*************************************Jason Su- 4:52 PM on April 5, 2021.**************************************/
     //This method checks what AI piece has moved from 2 boards
     public static int[][] hasMoved(Piece[][] start, Piece[][] end) {

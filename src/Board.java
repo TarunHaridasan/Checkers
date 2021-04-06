@@ -7,6 +7,11 @@
 import com.rits.cloning.Cloner;
 
 public class Board {
+    /*
+     ****************************************************************************************
+     ************************************** 2D ARRAY USE ************************************
+     ****************************************************************************************
+    */
     Piece[][] board = new Piece[8][8];
 
     //Game Settings
@@ -17,6 +22,11 @@ public class Board {
     String borderString = null; //BorderChar + Color
     int cellSpacing = 0; //Must be an odd number or printing will be broken
     int sideLength = 0;
+    /*
+     ****************************************************************************************
+     ************************************ USE OF CONSTANTS **********************************
+     ****************************************************************************************
+     */
     final static String FIRSTCHARS = "abcedefgh", SECONDCHARS = "12345678";
     final static Cloner CLONER = new Cloner();
 
@@ -48,7 +58,11 @@ public class Board {
             }
         }
     }
-
+    /*
+     ****************************************************************************************
+     ****************************** 1D ARRAY USE (RETURN VALUE) *****************************
+     ****************************************************************************************
+    */
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
     public static int[] toCoords(String input) {
         char letter = input.charAt(0);
@@ -63,6 +77,11 @@ public class Board {
         return new int[]{num, letterInt};
     }
 
+    /*
+     ****************************************************************************************
+     ********************** FUNCTION WITH PARAMETER AND RETURN VALUE ************************
+     ****************************************************************************************
+    */
     //This method creates formatted locations from array indices (0,0 will be converted to a1)
     public static String fromCoords(int[] coords) {
         char letter = (char) (coords[1]+97);
@@ -70,6 +89,11 @@ public class Board {
         return String.valueOf(letter) + String.valueOf(number);
     }
 
+    /*
+     ****************************************************************************************
+     ********************** FUNCTION WITH PARAMETER AND RETURN VALUE ************************
+     ****************************************************************************************
+    */
     //This method gets a piece from a coordinate
     public Piece getPiece(int[] coords) {
         return board[coords[0]][coords[1]];
@@ -83,6 +107,11 @@ public class Board {
                 return false;
         }
 
+        /*
+         ****************************************************************************************
+         ************************************* 1D ARRAY USE *************************************
+         ****************************************************************************************
+        */
         //Check if piece even exists at the start locations
         int[] start = path[0];
         if (board[start[0]][start[1]]==null) return false;
@@ -117,8 +146,18 @@ public class Board {
         return false;
     }
 
+    /*
+     ****************************************************************************************
+     ***************************** FUNCTION WITH PARAMETERS *********************************
+     ****************************************************************************************
+    */
     //This method relocates a piece on the board
     public void move(Piece piece, int[] end) {
+        /*
+         ****************************************************************************************
+         ************************************** 1D Array Use ************************************
+         ****************************************************************************************
+        */
         int[] start = piece.pos;
         int verticalDistance = end[0]-start[0];
         int horizontalDistance = end[1] - start[1];
@@ -134,6 +173,11 @@ public class Board {
         if (piece.side && piece.pos[0]==0 || !piece.side && piece.pos[0]==7) piece.promote();
     }
 
+    /*
+     ****************************************************************************************
+     ******************************* FUNCTION WITHOUT PARAMETERS ****************************
+     ****************************************************************************************
+    */
     /*************************************Tarun Haridasan- 3:00PM PM on April 4, 2021.**************************************/
     //This method checks if all of one side's piece are dead or if one team cannot make any moves to determine if the game is over.
     public Boolean isGameOver() {
@@ -154,6 +198,11 @@ public class Board {
         return true;
     }
 
+    /*
+     ****************************************************************************************
+     ********************** FUNCTION WITH PARAMETER AND RETURN VALUE ************************
+     ****************************************************************************************
+    */
     /*************************************Jason Su- 8:33 PM on April 1, 2021.**************************************/
     //This method checks if the input coordinates the user enters is valid and in the correct format
     public static Boolean isInputValid(String[] input) {

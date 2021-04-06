@@ -22,6 +22,11 @@ public class Screen {
         put("WHITE", "\u001B[37m");
     }};
 
+    /*
+     ****************************************************************************************
+     ********************************* FUNCTION WITH PARAMETERS *****************************
+     ****************************************************************************************
+    */
     /*************************************Tarun Haridasan- 9:50AM on March 27, 2021.**************************************/
     //This method prints the checker board onto the console window with the right formatting
     public static void printBoard(Board board) {
@@ -74,6 +79,11 @@ public class Screen {
         }
     }
 
+    /*
+     ****************************************************************************************
+     ********************************* FUNCTIONS WITH PARAMETERS ****************************
+     ****************************************************************************************
+    */
     /*************************************Fahad Mateen- 7:05PM on March 27, 2021.**************************************/
     //This command clears the console window (It adds lots of spaces)
     public static void clear(int space) {
@@ -108,6 +118,12 @@ public class Screen {
         System.out.println(message);
     }
 
+    /*
+     ****************************************************************************************
+     ************************************** CONSOLE INPUT ***********************************
+     ****************************************************************************************
+    */
+    //This method is used throughout the program as as shortcut for console input.
     //Shortcut prompt method.
     public static String prompt(String message) {
         //Variables and scanner
