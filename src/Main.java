@@ -4,6 +4,7 @@
     Main.java
     This is the main java file of the ICS4U checkers console game.
  */
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -104,11 +105,12 @@ public class Main {
             /* ************************************Fahad Mateen- 6:05PM on March 31, 2021.************************************* */
             else {
                 AI.MinimaxReturnType computerMove = AI.minimax(board, difficulty, false);
+                int[][] path = AI.hasMoved(board.board, computerMove.board.board);
                 board = computerMove.board;
                 Screen.println("");
                 Screen.println("AI is thinking...");
-                Screen.println("");
                 Thread.sleep(2000);
+                Screen.println("AI moved from "+ Arrays.toString(path[0])+" to "+Arrays.toString(path[1]));
                 player = true;
             }
 

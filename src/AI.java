@@ -81,7 +81,6 @@ public class AI {
     /*************************************Tarun Haridasan- 7:50PM on March 31, 2021.**************************************/
     //This method uses the minimax algorithm to calculate the best possible piece
     public static MinimaxReturnType minimax(Board board, int depth, boolean side) {
-
         if (board.isGameOver()) {
             if (side) return new MinimaxReturnType(Integer.MIN_VALUE);
             else return new MinimaxReturnType(Integer.MAX_VALUE);
@@ -152,5 +151,24 @@ public class AI {
             }
             return new MinimaxReturnType(minimum, bestBoard);
         }
+    }
+
+    /*************************************Jason Su- 4:52 PM on April 5, 2021.**************************************/
+    //This method checks what AI piece has moved from 2 boards
+    public static int[][] hasMoved(Piece[][] start, Piece[][] end) {
+        int[] startLocation = null;
+        int[] endLocation = null;
+        //Loop through all cells in the board.
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                //Find start location. If start board has an X but end board at the same index has null, this is the start position
+                if (start[i][j]!=null && !start[i][j].side && end[i][j]==null) startLocation = new int[] {i, j};
+                //Find end location. If end board has an X but start board at the same index has null, this is the end position.
+                else if (end[i][j]!=null && !end[i][j].side && start[i][j]==null) endLocation = new int[] {i, j};
+                //When we find both, no need to continue the loop
+                if (startLocation!=null && endLocation!=null) return new int[][] {startLocation, endLocation};
+            }
+        }
+        return new int[][] {startLocation, endLocation};
     }
 }
