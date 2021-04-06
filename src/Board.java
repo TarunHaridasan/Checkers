@@ -50,18 +50,24 @@ public class Board {
     }
 
     //The method converts the user input to array indexes (a1 will be converted to 0,0)
-    public int[] toCoords(String input) {
+    public static int[] toCoords(String input) {
         char letter = input.charAt(0);
         letter = Character.toLowerCase(letter);
         char num = input.charAt(1);
 
         int letterInt = (int)letter;
-        int numInt = (int)num;
 
         letterInt-=97; //Adjust the value so that it becomes zero indexed.
         num-=49;
 
         return new int[]{num, letterInt};
+    }
+
+    //This method creates formatted locations from array indices (0,0 will be converted to a1)
+    public static String fromCoords(int[] coords) {
+        char letter = (char) (coords[1]+97);
+        int number = coords[0]+1;
+        return String.valueOf(letter) + String.valueOf(number);
     }
 
     //This method gets a piece from a coordinate
@@ -93,14 +99,14 @@ public class Board {
         int verticalDistance = end[0]-start[0];
         boolean isKing = getPiece(path[0]).isKing;
         //Regular 1-diagonal space move
-        if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1 && mustKill==false) {
-            if ((verticalDistance==1 && turn==true && !isKing) || verticalDistance==-1 && turn==false && !isKing) return false;
+        if (Math.abs(horizontalDistance)==1 && Math.abs(verticalDistance)==1 && !mustKill) {
+            if ((verticalDistance==1 && turn && !isKing) || verticalDistance==-1 && !turn && !isKing) return false;
             return true;
         }
         /*************************************Tarun Haridasan-4:00 PM on March 29, 2021.**************************************/
         //Attack 2-diagonal space move
         else if (Math.abs(horizontalDistance)==2 && Math.abs(verticalDistance)==2){
-            if ((verticalDistance==2 && turn==true && !isKing) || verticalDistance==-2 && turn==false && !isKing) return false;
+            if ((verticalDistance==2 && turn && !isKing) || verticalDistance==-2 && !turn && !isKing) return false;
             Piece attackPiece = board[start[0]+(verticalDistance/2)][start[1]+(horizontalDistance/2)];
             if (attackPiece==null) return false;
             if (attackPiece.side==turn) return false;

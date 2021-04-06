@@ -75,7 +75,7 @@ public class Main {
 
                     //Convert the input to array indices
                     int[][] coordinateArr = new int[inputArr.length][2];
-                    for (int i=0; i< inputArr.length; i++) coordinateArr[i] = board.toCoords(inputArr[i]);
+                    for (int i=0; i< inputArr.length; i++) coordinateArr[i] = Board.toCoords(inputArr[i]);
 
                     //Deep clone the original array in case one of the move in the chain is valid
                     Piece[][] originalBoard = Board.CLONER.deepClone(board.board);
@@ -110,7 +110,7 @@ public class Main {
                 Screen.println("");
                 Screen.println("AI is thinking...");
                 Thread.sleep(2000);
-                Screen.println("AI moved from "+ Arrays.toString(path[0])+" to "+Arrays.toString(path[1]));
+                Screen.println("AI moved from "+ Board.fromCoords(path[0])+" to "+Board.fromCoords(path[1]));
                 player = true;
             }
 
