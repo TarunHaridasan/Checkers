@@ -4,6 +4,7 @@
     Main.java
     This is the main java file of the ICS4U checkers console game.
  */
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -85,7 +86,7 @@ public class Main {
 
                     //Convert the input to array indices
                     int[][] coordinateArr = new int[inputArr.length][2];
-                    for (int i=0; i< inputArr.length; i++) coordinateArr[i] = board.toCoords(inputArr[i]);
+                    for (int i=0; i< inputArr.length; i++) coordinateArr[i] = Board.toCoords(inputArr[i]);
 
                     //Deep clone the original array in case one of the move in the chain is valid
                     Piece[][] originalBoard = Board.CLONER.deepClone(board.board);
@@ -115,11 +116,12 @@ public class Main {
             /* ************************************Fahad Mateen- 6:05PM on March 31, 2021.************************************* */
             else {
                 AI.MinimaxReturnType computerMove = AI.minimax(board, difficulty, false);
+                int[][] path = AI.hasMoved(board.board, computerMove.board.board);
                 board = computerMove.board;
                 Screen.println("");
                 Screen.println("AI is thinking...");
-                Screen.println("");
-                Thread.sleep(2500);
+                Thread.sleep(2000);
+                Screen.println("AI moved from "+ Board.fromCoords(path[0])+" to "+Board.fromCoords(path[1]));
                 player = true;
             }
 
