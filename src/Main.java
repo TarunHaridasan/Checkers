@@ -36,6 +36,11 @@ public class Main {
                 boolean valid = false;
                 do {
                     String input = Screen.prompt("Input: ");
+                    /*
+                     ****************************************************************************************
+                     ************************************* FILE INPUT ***************************************
+                     ****************************************************************************************
+                    */
                     if(input.equalsIgnoreCase("save")) {
                         //Creating a file object for the saves directory.
                         File folder = new File("./saves/");

@@ -22,6 +22,11 @@ public class TitleScreen {
     public static void play() {
         Screen.println("Playing the game...");
     }
+    /*
+     ****************************************************************************************
+     ************************************* FILE OUTPUT **************************************
+     ****************************************************************************************
+    */
     //Loading game.
     public static void loadOpt() throws IOException, InterruptedException {
         //Prints out the title of the game.
@@ -96,6 +101,11 @@ public class TitleScreen {
         }
         TitleScreen.play();
     }
+    /*
+     ****************************************************************************************
+     ************************************* FILE OUTPUT **************************************
+     ****************************************************************************************
+    */
     /*************************************Fahad Mateen- 10:21PM on March 25, 2021.**************************************/
     public static String readSave(int code) throws IOException, InterruptedException {
         //Variables
