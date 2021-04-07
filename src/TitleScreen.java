@@ -27,7 +27,7 @@ public class TitleScreen {
      ************************************* FILE OUTPUT **************************************
      ****************************************************************************************
     */
-    //Loading game.
+    //This method handles loading data from save files when the user decides to load a saved game.
     public static void loadOpt() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -107,6 +107,8 @@ public class TitleScreen {
      ****************************************************************************************
     */
     /*************************************Fahad Mateen- 10:21PM on March 25, 2021.**************************************/
+    //This function takes in a code as an integer and returns the data stored in a save file named after said code.
+    //If there is no file found, the function returns an empty string.
     public static String readSave(int code) throws IOException, InterruptedException {
         //Variables
         String filePath = "saves/" +code+".txt";
@@ -138,7 +140,7 @@ public class TitleScreen {
         return data.toString();
     }
     /*************************************Fahad Mateen- 11:10PM on March 25, 2021.**************************************/
-    //About game.
+    //This method simply prints the about menu for the game.
     public static void about() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -151,7 +153,7 @@ public class TitleScreen {
         mainMenu();
     }
     /*************************************Fahad Mateen- 4:05PM on March 26, 2021.**************************************/
-    //Help menu.
+    //This method simply prints the help menu for the game.
     public static void help() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -164,7 +166,7 @@ public class TitleScreen {
         mainMenu();
     }
     /*************************************Fahad Mateen and Jason Su optimized - 6:10PM on March 26, 2021.**************************************/
-    //Settings menu.
+    //This method prints the settings menu for the game and handles setting changes within this screen.
     public static void settings() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -313,6 +315,7 @@ public class TitleScreen {
         }
     }
     /*************************************Fahad Mateen- 10:46AM on April 2, 2021.**************************************/
+    //This method asks the user for a difficulty level and sets the diffilcuty for the game.
     public static int difficulty() throws IOException, InterruptedException {
         //Asking for difficulty.
         Screen.printFromFile("./ASCII/difficulties.txt");
@@ -334,6 +337,7 @@ public class TitleScreen {
             Thread.sleep(1000);
             return difficulty();
         }
+        TitleScreen.difficulty = difficulty;
         return difficulty;
     }
     /*************************************Jason Su- 2:10PM on March 26, 2021.**************************************/
@@ -349,7 +353,7 @@ public class TitleScreen {
         new Choices() {public void run() throws IOException, InterruptedException { help(); } },
             new Choices() {public void run() throws IOException, InterruptedException { settings(); } }
     };
-    //Initializing the title screen.
+    //This method initializes the title screen and asks for the user's name.
     public static void initialize() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -361,7 +365,7 @@ public class TitleScreen {
         TitleScreen.difficulty = 0;
         mainMenu();
     }
-    //Printing the main menu.
+    //This method prints the main menu of the game.
     public static void mainMenu() throws IOException, InterruptedException {
         //Prints out the title of the game.
         for(int i = 0; i < 2; i++) Screen.println("");
@@ -372,6 +376,8 @@ public class TitleScreen {
         input();
     }
     /*************************************Jason Su- 4:00PM on March 26, 2021.**************************************/
+    //This method takes a user's input and uses it as an index in an array of functions to decide which one to run.
+    //This is used to run specific functions as the user chooses them on the main menu.
     public static void input() throws IOException, InterruptedException {
         int userInput = 0;
         //Asking for user input.
@@ -401,7 +407,7 @@ public class TitleScreen {
         }
     }
     /*************************************Jason Su and Fahad- 12: 04PM on March 26, 2021.**************************************/
-    //User input handling.
+    //This method validates the input from a user so that the other methods do not receive invalid inputs.
     public static boolean handleChoice(int userInput) throws IOException, InterruptedException {
         // Validating the user's input.
         if((userInput < 0) || (userInput >= choices.length)) return false;
