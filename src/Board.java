@@ -219,7 +219,7 @@ public class Board {
                 return false;
             }
             //Check if the first character is a letter and the second is a number
-            if(!(Board.FIRSTCHARS.contains(Character.toString(current.charAt((0))))) || !(Board.SECONDCHARS.contains(Character.toString(current.charAt((1)))))) {
+            if(!(Board.FIRSTCHARS.contains(Character.toString(current.charAt((0))).toLowerCase())) || !(Board.SECONDCHARS.contains(Character.toString(current.charAt((1)))))) {
                 Screen.println("Invalid coordinates! The first character must be a character between a and h, and the second character must be a number from 1 to 8");
                 return false;
             }
