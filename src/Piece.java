@@ -27,6 +27,11 @@ public class Piece {
         this.id = pos[0]+""+pos[1];
     }
 
+    /*
+     ****************************************************************************************
+     ******************************** FUNCTION WITHOUT PARAMETERS ***************************
+     ****************************************************************************************
+    */
     /*************************************Fahad Mateen- 5:45PM on March 26, 2021**************************************/
     //This method is used to promote the piece to a king
     public void promote() {
@@ -35,6 +40,11 @@ public class Piece {
         else icon = "\uD83C\uDD87"; //X king
     }
 
+    /*
+     ****************************************************************************************
+     ********************** FUNCTION WITH PARAMETER AND RETURN VALUE ************************
+     ****************************************************************************************
+    */
     /*************************************Tarun Haridasan- 11:56AM on March 27, 2021**************************************/
     //This method generates all the possible locations this piece  can move to (This will be used for the AI)
     public List<int[]> visualize(Board board) {
@@ -80,6 +90,11 @@ public class Piece {
         return moves;
     }
 
+    /*
+     ****************************************************************************************
+     ********************** FUNCTION WITH PARAMETER AND RETURN VALUE ************************
+     ****************************************************************************************
+    */
     /*************************************Tarun Haridasan- 1:25AM on April 3, 2021**************************************/
     //This recursive method is used to calculate all the possible chain moves for a piece
     public List<Board> visualizeChain(Board board) {
