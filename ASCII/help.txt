@@ -26,6 +26,11 @@
   │                                                                               │
   │      Example: b4 e5 e7 d3 -> (If your moves are all legal, this will work!)   │
   │                                                                               │
+  │            You can also SAVE your game! If you're tired and want to           │
+  │               play again later, simply type in "save" into the                │
+  │             input box while playing and you will be given a code.             │
+  │               This code is used to load your game from the main menu,         │
+  │                             so don't lose it!                                 │
   │                                                                               │
   │           Remember, don't bite off more than you can chew, and...             │
   │                                                                               │
